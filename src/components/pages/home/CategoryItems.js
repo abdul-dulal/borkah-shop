@@ -22,14 +22,16 @@ const CategoryItems = ({ item, loading }) => {
       {loading ? (
         <div className="parent text-center space-y-2 relative  hover:shadow-sm duration-200 ">
           <Link to="/singleproduct" state={{ _id }}>
-            <img src={item?.img[0]} className="cursor-pointer" alt="" />
+            {item?.img && (
+              <img src={item?.img[0]} className="cursor-pointer" alt="" />
+            )}
           </Link>
           <div className="item">
             <Button product={item} />
           </div>
-          <h1 className="cursor-pointer">{name.slice(0, 37)}...</h1>
+          <h1 className="cursor-pointer">{name?.slice(0, 37)}...</h1>
           <p className="text-primary text-base font-bold">
-            ${price.toLocaleString("en-US")}
+            ${price?.toLocaleString("en-US")}
           </p>
           <p className="flex justify-center items-center pb-3">
             {review

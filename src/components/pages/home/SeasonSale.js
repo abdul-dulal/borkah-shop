@@ -3,7 +3,7 @@ import sale from "../../../assets/img/featured/ne-bg-bnr-img.jpg";
 const SeasonSale = () => {
   return (
     <div
-      className="h-[80vh] flex justify-center items-center "
+      className="h-[86vh] flex justify-center items-center "
       style={{
         background: `url(${sale})`,
         backgroundPosition: "center",

@@ -7,7 +7,6 @@ import CategoryItems from "./CategoryItems";
 const FeaturedProduct = () => {
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(featured);
   useEffect(() => {
     axios
       .get("http://localhost:3000/product/api/v1/getAllProudct")

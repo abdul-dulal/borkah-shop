@@ -1,11 +1,14 @@
 import React from "react";
 import { useGetPostbyIdQuery } from "../../service/Post";
+import Featuredbanner from "../home/Featuredbanner";
+import Aboutus from "./Aboutus";
+import Counter from "./Counter";
 const About = () => {
-  const responseInfo = useGetPostbyIdQuery("63639fc9e925181c69617d10");
-  console.log(responseInfo);
   return (
     <div>
-      <h1>this is about page</h1>
+      <Featuredbanner name="About Us" />
+      <Aboutus />
+      <Counter />
     </div>
   );
 };

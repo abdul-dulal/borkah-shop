@@ -8,6 +8,7 @@ import SliderImage from "react-zoom-slider";
 import Description from "./ZoomSlider";
 import Sidebar from "./Sidebar";
 import ReletedProduct from "./ReletedProduct";
+import Featuredbanner from "./Featuredbanner";
 const SingleProduct = () => {
   const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
@@ -34,27 +35,7 @@ const SingleProduct = () => {
 
   return (
     <div className="relative">
-      <div
-        className="h-64 w-full   "
-        style={{
-          background: `url(${shop})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      ></div>
-      <div className="absolute top-0 left-0 h-64 w-full bg-black opacity-[.8] flex items-center">
-        <div className="md:px-20 px-8">
-          <h1 className="text-white text-2xl font-semibold first-letter:uppercase">
-            {name?.slice(0, 35)} ...
-          </h1>
-          <ul className="flex gap-3 text-white mt-3">
-            <Link to="/">Home ></Link>
-            <Link to="/shop">Product ></Link>
-            <li className="first-letter:uppercase">{name?.slice(0, 35)} ...</li>
-          </ul>
-        </div>
-      </div>
+      <Featuredbanner name={name} />
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 md:px-20 px-8  my-16">
         <div className=" lg:col-span-1 col-span-full md:row-span-3 lg:order-first order-last  ">
           <Sidebar categoryItem={categoryItem} price={price} />

@@ -5,11 +5,12 @@ const FashionWeek = () => {
   const navigate = useNavigate();
   return (
     <div
-      className="h-[80vh] flex justify-center items-center "
+      className="md:h-[86vh] h-auto w-full flex justify-center items-center md:my-0 py-5 "
       style={{
         background: `url(${women})`,
         backgroundPosition: "center",
         backgroundSize: "cover",
+        objectFit: "cover",
         backgroundRepeat: "no-repeat",
       }}
     >
@@ -20,7 +21,7 @@ const FashionWeek = () => {
         <h1 className="lg:text-4xl md:text-3xl text-2xl my-5 font-extrabold text-black text-center">
           JEANS STARTING AT $39
         </h1>
-        <div className="text-white text-center md:w-12/12 px-32 space-y-1 ml-8">
+        <div className="text-white text-center  md:px-60 px-40 space-y-1 ml-8">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
             nisi distinctio magni, iure

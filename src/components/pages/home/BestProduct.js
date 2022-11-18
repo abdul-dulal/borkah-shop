@@ -19,7 +19,7 @@ const BestProduct = () => {
       <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-x-4 gap-y-10 lg:px-20 px-10 my-14 ">
         {bestProduct.map((product) => (
           <CategoryItems
-            item={bestProduct}
+            item={product}
             loading={loading}
             key={bestProduct._id}
           />
