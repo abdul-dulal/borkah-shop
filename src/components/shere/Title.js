@@ -2,7 +2,7 @@ import React from "react";
 
 const Title = ({ title }) => {
   return (
-    <div>
+    <div className="mt-3">
       <h1 className="text-center text-[28px] font-bold pt-10 mb-3">{title}</h1>
       <p className="text-center md:px-20 px-8">
         Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting
