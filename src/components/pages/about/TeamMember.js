@@ -10,7 +10,7 @@ const TeamMember = () => {
     <div>
       <Title title="Our Team Members" />
       <div className="grid md:grid-cols-4  grid-cols-2 my-14  gap-7 lg:px-20 px-10 ">
-        <TeamDesc team={team1} name="Tasfia jannat" deg="Founder" />
+        <TeamDesc team={team1} name="Tasfia Jannat" deg="Founder" />
         <TeamDesc team={team2} name="Nusrat Jahan" deg="Designer" />
         <TeamDesc team={team3} name="Esrat Jahan" deg="Manager" />
         <TeamDesc team={team4} name="Umme Habiba" deg="Co-Founder" />

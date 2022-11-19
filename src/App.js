@@ -5,6 +5,7 @@ import HeaderTop from "./components/Navbar/HeaderTop";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./components/pages/about/About";
 import Blog from "./components/pages/blog/Blog";
+import Sinlgeblog from "./components/pages/blog/Sinlgeblog";
 import Contact from "./components/pages/contact/Contact";
 import Category from "./components/pages/home/Category";
 import Home from "./components/pages/home/Home";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/shop/:category" element={<Category />} />
           <Route path="/singleproduct" element={<SingleProduct />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:blogId" element={<Sinlgeblog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
