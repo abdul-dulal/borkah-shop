@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import HeaderTop from "./components/Navbar/HeaderTop";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./components/pages/about/About";
+import Author from "./components/pages/blog/Author";
 import Blog from "./components/pages/blog/Blog";
 import Sinlgeblog from "./components/pages/blog/Sinlgeblog";
 import Contact from "./components/pages/contact/Contact";
@@ -31,6 +32,7 @@ function App() {
           <Route path="/singleproduct" element={<SingleProduct />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<Sinlgeblog />} />
+          <Route path="/author" element={<Author />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
