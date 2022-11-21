@@ -162,14 +162,3 @@ img.w-11\/12 {
   z-index: 9999;
   transition: all 0.2s ease-in-out;
 }
-
-/* @media screen and (max-width: 1024px) {
-  .hello2:hover .hello {
-    height: 47%;
-  }
-}
-@media screen and (max-width: 1024px) {
-  .hello2:hover .hello {
-    height: 47%;
-  }
-} */

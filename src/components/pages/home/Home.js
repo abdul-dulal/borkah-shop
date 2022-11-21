@@ -9,6 +9,7 @@ import SeasonSale from "./SeasonSale";
 import TopCategory from "./TopCategory";
 import Slider from "./Slider";
 import Productbrand from "./Productbrand";
+import Blog from "./Blog";
 const Home = () => {
   return (
     <div>
@@ -22,6 +23,7 @@ const Home = () => {
       {/* <BestProduct /> */}
       <Feedback />
       <Productbrand />
+      <Blog />
     </div>
   );
 };

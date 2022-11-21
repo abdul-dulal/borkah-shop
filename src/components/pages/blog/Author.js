@@ -1,21 +1,10 @@
-import axios from "axios";
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import shop from "../../../assets/img/slider/borkha-slider-1.jpg";
-import AuthorDetails from "./AuthorDetails";
 import BlogSidebar from "./BlogSidebar";
+import Showblog from "./Showblog";
 const Author = () => {
-  const [authorData, setAuhorData] = useState([]);
-  const { author } = useLocation().state;
-  const [isloadng, setIsloading] = useState(false);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/blog/getDatabyAuthor?author=Dulal`)
-      .then((res) => setAuhorData(res.data));
-    setIsloading(true);
-  }, []);
   return (
     <div>
       <div className="relative">
@@ -34,7 +23,7 @@ const Author = () => {
               Author: Dulal
             </h1>
             <p className="text-xl text-white my-2">
-              This author has written {authorData.length} articles
+              This author has written 8 articles
             </p>
             <ul className="flex gap-3 text-white mt-3">
               <Link to="/">Home ></Link>
@@ -44,16 +33,14 @@ const Author = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-3 my-14 lg:px-20 px-10">
+      <div className="grid xl:grid-cols-3 grid-cols-1 my-14 lg:px-20 px-10">
         <div
-          className="col-span-2 grid grid-cols-3
+          className="col-span-2 
         "
         >
-          {authorData.map((data) => (
-            <AuthorDetails key={data._id} isloadng={isloadng} data={data} />
-          ))}
+          <Showblog />
         </div>
-        <div>
+        <div className="w-full">
           <BlogSidebar />
         </div>
       </div>

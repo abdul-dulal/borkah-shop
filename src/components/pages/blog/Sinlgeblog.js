@@ -5,14 +5,17 @@ import { BiUser } from "react-icons/bi";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { FaRegCommentDots } from "react-icons/fa";
 import Featuredbanner from "../home/Featuredbanner";
+import BlogSidebar from "./BlogSidebar";
+import Comment from "./Comment";
 const Sinlgeblog = () => {
   const [desc, setDesc] = useState();
   const { blogId } = useParams();
+
   useEffect(() => {
     axios
       .get(`http://localhost:3000/blog/singleblog/${blogId}`)
       .then((res) => setDesc(res.data));
-  }, []);
+  }, [blogId]);
   const DATE_OPTIONS = {
     weekday: "short",
     year: "numeric",
@@ -43,7 +46,7 @@ const Sinlgeblog = () => {
               )}
             </p>
             <p className="flex items-center gap-2 text-base ">
-              <FaRegCommentDots /> 0
+              <FaRegCommentDots /> <span>0 Comments</span>
             </p>
           </div>
           <p className="leading-7">
@@ -94,9 +97,10 @@ const Sinlgeblog = () => {
             consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
             pariatur?
           </p>
+          <Comment desc={desc} />
         </div>
         <div>
-          <h1>hello</h1>
+          <BlogSidebar />
         </div>
       </div>
     </div>

@@ -4,10 +4,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TopRated from "./TopRated";
-
-const Sidebar = ({ categoryItem, price }) => {
+import Pagination from "../shop/Pagination";
+const Sidebar = ({ categoryItem, price, range, rangeItem, setRangeItem }) => {
   const [product, setProduct] = useState([]);
   const [topRated, setToprated] = useState([]);
+
   const navigate = useNavigate();
   useEffect(() => {
     axios
@@ -19,6 +20,7 @@ const Sidebar = ({ categoryItem, price }) => {
       )
       .then((res) => setToprated(res.data));
   }, []);
+
   return (
     <div className="bg-[#F7F7F7] px-10 pt-4 pb-10">
       <input
@@ -28,7 +30,9 @@ const Sidebar = ({ categoryItem, price }) => {
         placeholder="Search Product..."
         className="h-12 w-full border-2 rounded  my-8 px-3 outline-offset-0 outline-primary ring-0"
       />
-      <p className="text-2xl font-bold my-3">Product Categories</p>
+
+      {range && <Pagination setRangeItem={setRangeItem} />}
+      <p className="text-2xl font-bold mt-6 mb-3">Product Categories</p>
       <p className="h-[1.5px] w-20 bg-primary"></p>
       <hr className="" />
       <div className=" space-y-2 my-5">
@@ -62,7 +66,7 @@ const Sidebar = ({ categoryItem, price }) => {
             <input type="radio" className="mr-2" /> Hijab Items
           </label>
           <p className="text-primary bg-[#EEEEEE]  rounded-full h-6 p-1 w-6">
-            {product.slice(21, 29).length}{" "}
+            {product?.slice(21, 29).length}
           </p>
         </div>
         <div

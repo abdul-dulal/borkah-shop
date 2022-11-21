@@ -21,9 +21,6 @@ const Showblog = () => {
         `http://localhost:3000/blog/allData?page=1&limit=${limit}`
       );
       const data = await res.json();
-
-      //   eita dynamic korte hbe
-      //   const total = res.headers.get("x-total-count");
       setpageCount(Math.ceil(8 / limit));
       setblog(data.results);
     };
@@ -43,8 +40,6 @@ const Showblog = () => {
     const pageItem = await fetchComments(currentPage);
 
     setblog(pageItem.results);
-    // scroll to the top
-    //window.scrollTo(0, 0)
   };
   const DATE_OPTIONS = {
     weekday: "short",
@@ -54,7 +49,7 @@ const Showblog = () => {
   };
   return (
     <div>
-      <div className="grid grid-cols-3 gap-10 my-16">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10 my-16 items-center">
         {blogs.map((blog) => (
           <div>
             <img src={blog.blogImg} alt="" />
@@ -66,12 +61,12 @@ const Showblog = () => {
               )}
             </p>
             <h1
-              className="text-xl font-semibold my-1  cursor-pointer"
+              className="text-xl font-semibold my-1 hover:text-primary line-clamp-1   cursor-pointer"
               onClick={() => handleblog(blog._id)}
             >
-              {blog.blogTitle.slice(0, 37)}...
+              {blog.blogTitle}
             </h1>
-            <p className="leading-7	">
+            <p className="leading-7	text-[15px] ">
               Contrary to popular belief, Lorem Ipsum is not simply random text.
               It has roots in a piece of classical Latin literature from 45 BC,
               making it over 2000 years old.…
@@ -85,7 +80,7 @@ const Showblog = () => {
           </div>
         ))}
       </div>
-      <div className="mb-10">
+      <div className="my-10 ">
         <ReactPaginate
           previousLabel={<FaAngleLeft />}
           nextLabel={<FaAngleRight />}

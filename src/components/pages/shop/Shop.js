@@ -1,9 +1,10 @@
 import React from "react";
+import Index from "./Index";
 
 const Shop = () => {
   return (
     <div>
-      <h1>shop</h1>
+      <Index />
     </div>
   );
 };

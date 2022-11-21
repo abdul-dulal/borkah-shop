@@ -20,7 +20,7 @@ const CategoryItems = ({ item, loading }) => {
   return (
     <div>
       {loading ? (
-        <div className="parent text-center space-y-2 relative  hover:shadow-sm duration-200 ">
+        <div className="parent text-center relative  hover:shadow-sm duration-200 ">
           <Link to="/singleproduct" state={{ _id }}>
             {item?.img && (
               <img src={item?.img[0]} className="cursor-pointer" alt="" />
@@ -29,8 +29,8 @@ const CategoryItems = ({ item, loading }) => {
           <div className="item">
             <Button product={item} />
           </div>
-          <h1 className="cursor-pointer">{name?.slice(0, 37)}...</h1>
-          <p className="text-primary text-base font-bold">
+          <h1 className="cursor-pointer line-clamp-1 mt-6">{name}...</h1>
+          <p className="text-primary text-base font-bold my-2">
             ${price?.toLocaleString("en-US")}
           </p>
           <p className="flex justify-center items-center pb-3">

@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import About from "./components/pages/about/About";
 import Author from "./components/pages/blog/Author";
 import Blog from "./components/pages/blog/Blog";
+import BlogCategory from "./components/pages/blog/BlogCategory";
 import Sinlgeblog from "./components/pages/blog/Sinlgeblog";
 import Contact from "./components/pages/contact/Contact";
 import Category from "./components/pages/home/Category";
@@ -32,6 +33,8 @@ function App() {
           <Route path="/singleproduct" element={<SingleProduct />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:blogId" element={<Sinlgeblog />} />
+          <Route path="/category" element={<BlogCategory />} />
+          {/* <Route Route="/tags" /> */}
           <Route path="/author" element={<Author />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<Signup />} />
