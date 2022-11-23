@@ -6,7 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 const BlogSidebar = () => {
   const [allBlog, setallBlog] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  console.log(searchTerm);
 
   useEffect(() => {
     axios
@@ -19,13 +21,11 @@ const BlogSidebar = () => {
     month: "short",
     day: "numeric",
   };
-  const handleblog = (id) => {};
   return (
     <div className="bg-[#F7F7F7] px-10 pt-4 pb-10">
       <input
         type="text"
-        name=""
-        id=""
+        onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search Product..."
         className="h-12 lg:w-full sm:w-7/12 w-full border-2 rounded  my-8 px-3 outline-offset-0 outline-primary ring-0"
       />

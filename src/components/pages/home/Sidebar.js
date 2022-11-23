@@ -4,130 +4,87 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TopRated from "./TopRated";
+import { TfiAngleRight } from "react-icons/tfi";
 import Pagination from "../shop/Pagination";
-const Sidebar = ({ categoryItem, price, range, rangeItem, setRangeItem }) => {
-  const [product, setProduct] = useState([]);
+import ProductCategory from "../../shere/ProductCategory";
+const Sidebar = ({
+  categoryItem,
+  products,
+  range,
+  lowest,
+  setlowest,
+  highest,
+  setHighest,
+}) => {
   const [topRated, setToprated] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [errElement, seterrElement] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/product/api/v1/getAllProudct")
-      .then((res) => setProduct(res.data));
     axios
       .get(
         `http://localhost:3000/product/api/v1/topRatedProduct?category=${categoryItem}&price=1000`
       )
       .then((res) => setToprated(res.data));
-  }, []);
+  }, [categoryItem]);
 
+  const handleSearch = () => {
+    if (searchTerm && typeof searchTerm === String) {
+      return navigate(`/searchby/${searchTerm}`);
+    } else {
+      seterrElement("Please Enter string");
+    }
+  };
   return (
     <div className="bg-[#F7F7F7] px-10 pt-4 pb-10">
-      <input
-        type="text"
-        name=""
-        id=""
-        placeholder="Search Product..."
-        className="h-12 w-full border-2 rounded  my-8 px-3 outline-offset-0 outline-primary ring-0"
-      />
+      <span className="flex  items-center">
+        <input
+          type="text"
+          name="search"
+          required
+          id=""
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search Product..."
+          className="h-10   w-10/12 border-2   my-8 px-3 outline-offset-0 outline-primary ring-0"
+        />
 
-      {range && <Pagination setRangeItem={setRangeItem} />}
+        <TfiAngleRight
+          onClick={handleSearch}
+          className="bg-primary font-bold cursor-pointer  text-white h-10 ml-1 w-6 "
+        />
+      </span>
+      <p className="text-red-700 text-xl">{errElement}</p>
+
+      {range && (
+        <Pagination
+          lowest={lowest}
+          setlowest={setlowest}
+          highest={highest}
+          setHighest={setHighest}
+        />
+      )}
       <p className="text-2xl font-bold mt-6 mb-3">Product Categories</p>
       <p className="h-[1.5px] w-20 bg-primary"></p>
       <hr className="" />
-      <div className=" space-y-2 my-5">
-        <div
-          className="flex justify-between items-center cursor-pointer"
-          onClick={() => navigate(`/shop/${"abaya"}`)}
-        >
-          <label className="cursor-pointer ">
-            <input type="radio" className="mr-2" /> Abaya Borka
-          </label>
-          <p className="text-primary bg-[#EEEEEE]  rounded-full h-6 p-1 w-6">
-            {product.slice(0, 8).length}
-          </p>
-        </div>
-        <div
-          className="flex justify-between items-center cursor-pointer"
-          onClick={() => navigate(`/shop/${"borkha"}`)}
-        >
-          <label className="cursor-pointer ">
-            <input type="radio" className="mr-2" /> Borka Items
-          </label>
-          <p className="text-primary bg-[#EEEEEE]  rounded-full h-6 p-1 w-6">
-            {product.slice(9, 20).length}
-          </p>
-        </div>
-        <div
-          className="flex justify-between items-center cursor-pointer"
-          onClick={() => navigate(`/shop/${"hijab"}`)}
-        >
-          <label className="cursor-pointer ">
-            <input type="radio" className="mr-2" /> Hijab Items
-          </label>
-          <p className="text-primary bg-[#EEEEEE]  rounded-full h-6 p-1 w-6">
-            {product?.slice(21, 29).length}
-          </p>
-        </div>
-        <div
-          className="flex justify-between items-center cursor-pointer"
-          onClick={() => navigate(`/shop/${"khimar"}`)}
-        >
-          <label className="cursor-pointer ">
-            <input type="radio" className="mr-2" />
-            Khimar
-          </label>
-          <p className="text-primary bg-[#EEEEEE]  rounded-full h-6 p-1 w-6">
-            {product.slice(29, 33).length}
-          </p>
-        </div>
-        <div
-          className="flex justify-between items-center cursor-pointer"
-          onClick={() => navigate(`/shop/${"niqab"}`)}
-        >
-          <label className="cursor-pointer ">
-            <input type="radio" className="mr-2" />
-            Niqab
-          </label>
-          <p className="text-primary bg-[#EEEEEE]  rounded-full h-6 p-1 w-6">
-            {product.slice(29, 33).length}
-          </p>
-        </div>
-
-        <div
-          className="flex justify-between items-center cursor-pointer"
-          onClick={() => navigate(`/shop/${"stylish"}`)}
-        >
-          <label className="cursor-pointer ">
-            <input type="radio" className="mr-2" />
-            Stylish Borka
-          </label>
-          <p className="text-primary bg-[#EEEEEE]  rounded-full h-6 p-1 w-6">
-            {product.slice(35, 46).length}
-          </p>
-        </div>
-        <div
-          className="flex justify-between items-center  cursor-pointer"
-          onClick={() => navigate(`/shop/${"abaya"}`)}
-        >
-          <label className="cursor-pointer ">
-            <input type="radio" className="mr-2" />
-            Uncategorized
-          </label>
-          <p className="text-primary bg-[#EEEEEE]  rounded-full h-6 p-1 w-6">
-            {product.slice(44, 46).length}
-          </p>
-        </div>
-      </div>
+      <ProductCategory />
       <div>
         <p className="text-2xl font-bold my-3">Top Rated Products</p>
         <p className="h-[1.5px] w-20 bg-primary"></p>
         <hr />
-        <div className=" mt-8">
-          {topRated?.map((item) => (
-            <TopRated item={item} key={item._id} />
-          ))}
-        </div>
+
+        {range ? (
+          <div className="mt-8">
+            {products?.slice(0, 3).map((product) => (
+              <TopRated item={product} key={product._id} />
+            ))}
+          </div>
+        ) : (
+          <div className=" mt-8">
+            {topRated?.map((item) => (
+              <TopRated item={item} key={item._id} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,21 +2,25 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const postApi = createApi({
   reducerPath: "postApi",
-
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/",
-  }),
-  tagTypes: ["Post"],
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  tagTypes: ["Task"],
   endpoints: (builder) => ({
+    getAllCartItem: builder.query({
+      query: () => ({
+        url: `cart/getAllItem`,
+        method: "GET",
+      }),
+      providesTags: ["Task"],
+    }),
     getPostbyId: builder.query({
       query: (id) => ({
         url: `product/api/v1/getbyId/${id}`,
         method: "GET",
       }),
-      providesTags: ["Post"],
     }),
     createPost: builder.mutation({
       query: (newPost) => {
+        console.log(newPost);
         return {
           url: `cart/cartItem`,
           method: "POST",
@@ -26,14 +30,17 @@ export const postApi = createApi({
           },
         };
       },
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["Task"],
     }),
-
-    getAllCartItem: builder.query({
-      query: () => ({
-        url: `cart/getAllItem`,
-        method: "GET",
-      }),
+    deletePost: builder.mutation({
+      query: (id) => {
+        console.log(id);
+        return {
+          url: `cart/delete-cartItem/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Task"],
     }),
   }),
 });
@@ -42,4 +49,5 @@ export const {
   useGetPostbyIdQuery,
   useCreatePostMutation,
   useGetAllCartItemQuery,
+  useDeletePostMutation,
 } = postApi;

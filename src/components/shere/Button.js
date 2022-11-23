@@ -9,8 +9,8 @@ const Button = ({ product }) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const [createPost, responseInfo] = useCreatePostMutation();
-
-  const handleAddtoCart = (product) => {
+  console.log(responseInfo);
+  const handleAddtoCart = async (product) => {
     const cartItem = {
       name: product.name,
       price: product.price,
@@ -19,7 +19,7 @@ const Button = ({ product }) => {
     };
 
     if (user) {
-      createPost(cartItem);
+      await createPost(cartItem);
     } else {
       return navigate("/signup");
     }

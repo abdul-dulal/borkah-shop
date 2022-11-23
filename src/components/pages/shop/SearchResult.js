@@ -3,32 +3,33 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
+import { useParams } from "react-router-dom";
 import CategoryItems from "../home/CategoryItems";
-import Sidebar from "../home/Sidebar";
+import SearchSiderbar from "./SearchSiderbar";
 
-const Index = () => {
-  const [products, setProduct] = useState([]);
+const SearchResult = () => {
+  const [searchProduct, setSearchProduct] = useState([]);
   const [pageCount, setpageCount] = useState(0);
-  const [lowest, setlowest] = useState(400);
-  const [highest, setHighest] = useState(8000);
   const [loading, setLoading] = useState(false);
+  const { text } = useParams();
 
   let limit = 12;
   useEffect(() => {
     const getComments = async () => {
       const res = await fetch(
-        `http://localhost:3000/product/pagination?page=1&limit=${limit}&lowest=${lowest}&highest=${highest}`
+        `http://localhost:3000/product/search?name=${text}&page=1&limit=12`
       );
       const data = await res.json();
+      console.log(data.results);
       setLoading(true);
       setpageCount(Math.ceil(46 / limit));
-      setProduct(data.results);
+      setSearchProduct(data.results);
     };
     getComments();
-  }, [limit, lowest, highest]);
+  }, [limit, text]);
   const fetchComments = async (currentPage) => {
     const res = await fetch(
-      `http://localhost:3000/product/pagination?page=${currentPage}&limit=${limit}&lowest=${lowest}&highest=${highest}`
+      `http://localhost:3000/product/search?page=${currentPage}&limit=${limit}&name=${text}`
     );
     const data = await res.json();
     return data;
@@ -38,26 +39,19 @@ const Index = () => {
     let currentPage = data.selected + 1;
     const pageItem = await fetchComments(currentPage);
 
-    setProduct(pageItem.results);
+    setSearchProduct(pageItem.results);
   };
 
   return (
     <div>
       <div className="grid lg:grid-cols-3 grid-cols-1  gap-4 my-10  lg:px-20 px-10">
         <div className="lg:col-span-1 col-span-full  lg:order-first order-last">
-          <Sidebar
-            range={true}
-            lowest={lowest}
-            setlowest={setlowest}
-            highest={highest}
-            setHighest={setHighest}
-            products={products}
-          />
+          <SearchSiderbar topRated={searchProduct} />
         </div>
         <div className="lg:col-start-2 lg:col-end-4 w-full  ">
           <div>
             <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
-              {products.map((product) => (
+              {searchProduct.map((product) => (
                 <CategoryItems
                   key={product._id}
                   item={product}
@@ -87,4 +81,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default SearchResult;

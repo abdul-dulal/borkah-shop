@@ -15,12 +15,12 @@ const Home = () => {
     <div>
       {/* <Slider /> */}
       <TopCategory />
-      {/* <FeaturedProduct /> */}
-      {/* <HijabItem /> */}
-      {/* <SeasonSale /> */}
-      {/* <Heilight /> */}
-      {/* <FashionWeek /> */}
-      {/* <BestProduct /> */}
+      <FeaturedProduct />
+      <HijabItem />
+      <SeasonSale />
+      <Heilight />
+      <FashionWeek />
+      <BestProduct />
       <Feedback />
       <Productbrand />
       <Blog />

@@ -1,19 +1,6 @@
-import axios from "axios";
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 import ReactSlider from "react-slider";
-
-const Pagination = ({ setRangeItem }) => {
-  const [lowest, setlowest] = useState(400);
-  const [highest, setHighest] = useState(8000);
-  useEffect(() => {
-    axios
-      .get(
-        `http://localhost:3000/product/rangeProduct?lowest=${lowest}&highest=${highest}`
-      )
-      .then((res) => setRangeItem(res.data));
-  }, [lowest, highest]);
+const Pagination = ({ lowest, setlowest, highest, setHighest }) => {
   return (
     <div>
       <div>
@@ -22,7 +9,7 @@ const Pagination = ({ setRangeItem }) => {
         <hr className="" />
         <p className="mt-5 font-semibold">price</p>
         <p className="pb-5 tracking-wider">
-          ${lowest}-${highest.toLocaleString("en-US")}
+          ${lowest}-${highest?.toLocaleString("en-US")}
         </p>
         <ReactSlider
           defaultValue={[lowest, highest]}
