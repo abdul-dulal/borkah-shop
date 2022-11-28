@@ -1,6 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import auth from "../../../Firebaseinit";
+import {
+  useDeleteManyMutation,
+  useGetCartItemsbyuserQuery,
+} from "../../service/Post";
 
 const CheckoutForm = ({ order, setOpen }) => {
   const stripe = useStripe();
@@ -10,8 +17,12 @@ const CheckoutForm = ({ order, setOpen }) => {
   const [processing, setProcessing] = useState(false);
   const [transaction, setTransaction] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-
+  const navigate = useNavigate();
   const newPrice = { price: order?.price };
+  const [user] = useAuthState(auth);
+  const { data } = useGetCartItemsbyuserQuery(user?.email);
+  const ids = data.map((e) => e._id);
+  const [deletePost] = useDeleteManyMutation();
 
   useEffect(() => {
     fetch(`http://localhost:3000/create-payment-intent`, {
@@ -87,9 +98,15 @@ const CheckoutForm = ({ order, setOpen }) => {
           item: order.item,
           transactionId: paymentIntent.id,
         })
-        .then((res) => console.log(res));
+
+        .then((res) => {
+          if (res.data.message === "Success") {
+            return deletePost(ids), navigate("/myaccount/orderHistory");
+          }
+        });
     }
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -121,10 +138,6 @@ const CheckoutForm = ({ order, setOpen }) => {
       {success && (
         <div className="text-green-700 my-4 text-center">
           <p>{success}</p>
-          <p>
-            Your Transaction Id
-            <span className="text-orange-500  font-bold">{transaction}</span>
-          </p>
         </div>
       )}
     </>

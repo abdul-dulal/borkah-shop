@@ -1,9 +1,61 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../Firebaseinit";
 
 const OrderHistory = () => {
+  const [orders, setOrder] = useState([]);
+  const [user] = useAuthState(auth);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/order/myOrder?user=${user?.email}`)
+      .then((res) => setOrder(res.data));
+  }, [user?.email]);
+  const DATE_OPTIONS = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
   return (
     <div>
-      <h1>order History</h1>
+      {orders.length > 0 ? (
+        <div class="overflow-x-auto  pr-5">
+          <table class="table w-full ">
+            <thead className="">
+              <tr className=" ">
+                <th className="text-[15px]">Order</th>
+                <th className="text-[15px]"> Date</th>
+                <th className="text-[15px]">Status</th>
+                <th className="text-[15px]">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr>
+                  <th>{order.transactionId.slice(0, 7)} </th>
+                  <td>
+                    {" "}
+                    {new Date(order.createdAt).toLocaleDateString(
+                      "en-US",
+                      DATE_OPTIONS
+                    )}
+                  </td>
+
+                  <td>pending</td>
+                  <td>${order.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <h1 className="text-xl font-semibold">No order yet...</h1>
+      )}
     </div>
   );
 };

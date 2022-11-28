@@ -36,12 +36,26 @@ export const postApi = createApi({
       },
       invalidatesTags: ["Task"],
     }),
+    deleteMany: builder.mutation({
+      query: (ids) => {
+        console.log(ids);
+        return {
+          url: `cart/deleteAllItems`,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ids }),
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Task"],
+    }),
   }),
 });
 
 export const {
   useGetCartItemsbyuserQuery,
   useCreatePostMutation,
-
   useDeletePostMutation,
+  useDeleteManyMutation,
 } = postApi;
