@@ -14,7 +14,6 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
   const location = useLocation();
   const id = location.state._id;
-
   const { name, price, review, img, category } = product;
   const navigate = useNavigate();
   const categoryList = [

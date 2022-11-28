@@ -5,22 +5,17 @@ export const postApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
   tagTypes: ["Task"],
   endpoints: (builder) => ({
-    getAllCartItem: builder.query({
-      query: () => ({
-        url: `cart/getAllItem`,
-        method: "GET",
-      }),
+    getCartItemsbyuser: builder.query({
+      query: (user) => {
+        return {
+          url: `cart/get-cartItems?user=${user}`,
+          method: "GET",
+        };
+      },
       providesTags: ["Task"],
-    }),
-    getPostbyId: builder.query({
-      query: (id) => ({
-        url: `product/api/v1/getbyId/${id}`,
-        method: "GET",
-      }),
     }),
     createPost: builder.mutation({
       query: (newPost) => {
-        console.log(newPost);
         return {
           url: `cart/cartItem`,
           method: "POST",
@@ -34,7 +29,6 @@ export const postApi = createApi({
     }),
     deletePost: builder.mutation({
       query: (id) => {
-        console.log(id);
         return {
           url: `cart/delete-cartItem/${id}`,
           method: "DELETE",
@@ -46,8 +40,8 @@ export const postApi = createApi({
 });
 
 export const {
-  useGetPostbyIdQuery,
+  useGetCartItemsbyuserQuery,
   useCreatePostMutation,
-  useGetAllCartItemQuery,
+
   useDeletePostMutation,
 } = postApi;

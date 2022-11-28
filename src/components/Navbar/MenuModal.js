@@ -10,7 +10,7 @@ const MenuModal = ({ setMenu }) => {
   return (
     <div
       style={{ zIndex: "1000000" }}
-      class="  overflow-x-hidden overflow-y-auto inset-0  -top-2 left-0 fixed  absulate right-0 mt-2 w-full h-screen px-10 rounded-md shadow-lg py-1 bg-[rgba(0,0,0,0.9)] "
+      className="  overflow-x-hidden overflow-y-auto inset-0  -top-2 left-0 fixed  absulate right-0 mt-2 w-full h-screen px-10 rounded-md shadow-lg py-1 bg-[rgba(0,0,0,0.9)] "
     >
       <div className="">
         <div className="flex justify-end">

@@ -9,13 +9,13 @@ const Button = ({ product }) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const [createPost, responseInfo] = useCreatePostMutation();
-  console.log(responseInfo);
   const handleAddtoCart = async (product) => {
+    console.log(product.img);
     const cartItem = {
       name: product.name,
       price: product.price,
       user: user.email,
-      img: product.img[0],
+      img: product.img,
     };
 
     if (user) {

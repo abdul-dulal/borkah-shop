@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/img/borkha-shop-logo.png";
 import { RiArrowDownSLine } from "react-icons/ri";
 import Submenu from "./Submenu";
@@ -9,17 +9,24 @@ import Logout from "../shere/Logout";
 import auth from "../../Firebaseinit";
 import avatar from "../../assets/img/avatar.a296afc6.png";
 import CartModal from "../../components/shere/CartModal";
-import { useGetAllCartItemQuery } from "../service/Post";
+import { useGetCartItemsbyuserQuery } from "../service/Post";
+import HeaderTop from "./HeaderTop";
+import Signup from "../../../src/components/pages/signup/Signup";
 const Navbar = () => {
   const [cartModal, setCartmodal] = useState(false);
+  const [hide, setHide] = useState(true);
   const [user] = useAuthState(auth);
-  const { data } = useGetAllCartItemQuery();
+  const { data } = useGetCartItemsbyuserQuery(user?.email);
 
   let activeStyle = {
     color: "#F766AD",
   };
+  const handleHide = () => {
+    setHide(!hide);
+  };
   return (
     <div>
+      <HeaderTop />
       <div className="flex justify-between px-20 h-24 items-center sticky object-contain">
         <div>
           <NavLink to="home">
@@ -120,26 +127,43 @@ const Navbar = () => {
               </p>
             </div>
           </div>
-          <div className="dropdown dropdown-bottom dropdown-end">
-            <label
-              tabIndex={0}
-              className="flex items-center justify-center cursor-pointer "
-            >
-              <img src={avatar} className="w-7" alt="" />
+          <div className="dropdown dropdown-end ">
+            <label tabIndex="0" className="">
+              {user ? (
+                <img
+                  src={user.photoURL}
+                  onClick={handleHide}
+                  className="w-8 h-8 rounded-full cursor-pointer"
+                  alt=""
+                />
+              ) : (
+                <img
+                  src={avatar}
+                  onClick={handleHide}
+                  className="w-8 h-8  cursor-pointer"
+                  alt=""
+                />
+              )}
             </label>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu bg-white w-40 mt-5 -ml-10"
-            >
-              <li className="hover:bg-primary hover:text-white">
-                <a>Abaya Borka</a>
-              </li>
-              <hr />
-              <li className="hover:bg-primary hover:text-white">
-                <a>Borka Items</a>
-              </li>
-              <hr />
-            </ul>
+            {hide ? (
+              ""
+            ) : (
+              <>
+                <ul
+                  tabIndex="0"
+                  className="dropdown-content py-10 menu ml-4 p-2 bg-base-100 w-52"
+                >
+                  <li className=" text-primary">
+                    <Link to="/myaccount">My Account</Link>
+                  </li>
+                  <hr />
+                  <li className=" text-primary">
+                    <Link to="">Setting</Link>
+                  </li>
+                  <hr />
+                </ul>
+              </>
+            )}
           </div>
         </div>
 

@@ -13,18 +13,20 @@ const Cartdetails = ({ data, price }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
-      console.log(result);
       if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
         deletePost(id);
       }
     });
   };
   return (
-    <div>
+    <div className="mt-4">
       <div className="flex gap-4 px-3 justify-between m-2">
-        <img src={data.img} className="w-16 h-16 text-primary " alt="" />
+        <img src={data.img[0]} className="w-16 h-16 text-primary " alt="" />
         <div>
-          <h2>{data.name.slice(0, 30)}</h2>
+          <p className="text-primary hover:text-black  line-clamp-2">
+            {data.name}
+          </p>
           <p> Price ${data.price}</p>
           <p>Quantity :1 </p>
         </div>
