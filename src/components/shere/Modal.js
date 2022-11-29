@@ -34,19 +34,21 @@ const Modal = ({ setModal, id }) => {
     setIloading(true);
   }, [id]);
   return (
-    <div className="overflow-x-hidden overflow-y-auto fixed inset-0  outline-none focus:outline-none z-50 mt-8 ">
-      <div className={`relative my-6 w-11/12 md:w-4/5 m-auto `}>
+    <div className=" overflow-x-hidden overflow-y-auto inset-0 -top-2 left-0 fixed absulate right-0 mt-2 w-full h-screen px-10 rounded-md shadow-lg py-1 z-30 bg-[rgba(0,0,0,0.5)] ">
+      <div className={`relative my-6 lg:w-9/12 w-11/12 md:w-4/5 m-auto `}>
         <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-          <div className="flex justify-between mt-8 px-8 pt-4">
-            <h2 className="text-xl font-semibold">{item?.name.slice(0, 49)}</h2>
+          <div className="flex  justify-between mt-8 px-8 pt-4">
+            <h2 className="md:text-xl font-semibold line-clamp-1">
+              {item?.name}
+            </h2>
 
             <MdClear
-              className="  text-4xl mt-3 cursor-pointer"
+              className="  text-4xl  cursor-pointer"
               onClick={() => [setModal(false), setPopupWith(false)]}
             />
           </div>
           <p className="border-solid border border-primary mt-7"></p>
-          <div className="flex gap-6  py-16 px-12 ">
+          <div className=" grid lg:grid-cols-2 grid-cols-1   py-16 px-12 ">
             <InnerImageZoom
               src={item?.img[0]}
               zoomSrc={item?.img[0]}
@@ -55,7 +57,7 @@ const Modal = ({ setModal, id }) => {
               className="w-96 h-96"
             />
             <div>
-              <h2 className="text-xl text-primary  mb-2 ml-0 ">
+              <h2 className="text-xl text-primary  mb-2 line-clamp-1 flex">
                 {item?.name.slice(0, 40)}
               </h2>
 
@@ -69,7 +71,7 @@ const Modal = ({ setModal, id }) => {
                       <AiTwotoneStar className="text-[#F9CA63] text-[18px] " />
                     )
                   : ""}
-                <span className="text-primary ml-2 text-sm ">
+                <span className="text-primary  text-sm ">
                   ({item?.review} Customer Reviews)
                 </span>
               </p>
@@ -104,7 +106,7 @@ const Modal = ({ setModal, id }) => {
                   </button>
                 </div>
                 <div className="flex gap-3 items-center">
-                  <button className=" bg-gray-800 text-white text-sm w-36 h-10 uppercase rounded-md hover:bg-purple-600 hover:text-white duration-500">
+                  <button className=" bg-primary text-white text-sm w-36 h-10 uppercase rounded-md hover:bg-black hover:text-white duration-500">
                     Add to cart
                   </button>
                 </div>

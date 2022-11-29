@@ -10,7 +10,7 @@ const Cart = () => {
   const [user] = useAuthState(auth);
   const { data } = useGetCartItemsbyuserQuery(user?.email);
   return (
-    <div className="lg:px-20 px-10">
+    <div className="lg:px-20 px-10 -z-[9999]">
       {user ? (
         <>
           <div class="overflow-x-auto  mt-6">

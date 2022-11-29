@@ -174,3 +174,25 @@ img.w-11\/12 {
 .example-track.example-track-2 {
   background: #0f0;
 }
+
+/* practice */
+
+.modal-backdrop {
+  position: absolute;
+  top: 150px;
+  bottom: 0;
+  left: 0;
+  right: 50px;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  display: flex;
+  justify-content: flex-end;
+  z-index: 2;
+}
+
+.modal-content {
+  width: 320px;
+  height: 384px;
+  overflow-y: scroll;
+  background-color: white;
+  padding: 25px;
+}

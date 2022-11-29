@@ -21,7 +21,7 @@ const Cartdetails = ({ data, price }) => {
   };
   return (
     <div className="mt-4">
-      <div className="flex gap-4 px-3 justify-between m-2">
+      <div className="flex gap-4  justify-between m-2">
         <img src={data.img[0]} className="w-16 h-16 text-primary " alt="" />
         <div>
           <p className="text-primary hover:text-black  line-clamp-2">

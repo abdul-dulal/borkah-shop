@@ -45,12 +45,12 @@ const Sidebar = ({
           id=""
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Product..."
-          className="h-10   w-10/12 border-2   my-8 px-3 outline-offset-0 outline-primary ring-0"
+          className="h-12  outline-none w-10/12 border-2   my-8 px-3 focus:outline-offset-0 focus:outline-primary ring-0"
         />
 
         <TfiAngleRight
           onClick={handleSearch}
-          className="bg-primary font-bold cursor-pointer  text-white h-10 ml-1 w-6 "
+          className="bg-primary font-bold cursor-pointer  text-white h-[46px] ml-1 w-6 "
         />
       </span>
       <p className="text-red-700 text-xl">{errElement}</p>
