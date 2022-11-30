@@ -14,7 +14,7 @@ import Signup from "../pages/signup/Signup";
 export const PublicRoute = [
   { path: "/", name: "home", Component: Home },
   { path: "/home", name: "home", Component: Home },
-  { path: "/about", name: "About", Component: About },
+  // { path: "/about", name: "About", Component: About },
   { path: "/shop", name: "shop", Component: Shop },
   { path: "/login", name: "login", Component: Login },
   { path: "/signup", name: "signup", Component: Signup },

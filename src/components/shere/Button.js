@@ -10,19 +10,18 @@ const Button = ({ product }) => {
   const navigate = useNavigate();
   const [createPost, responseInfo] = useCreatePostMutation();
   const handleAddtoCart = async (product) => {
-    console.log(product.img);
     const cartItem = {
       name: product.name,
       price: product.price,
-      user: user.email,
+      user: user?.email,
       img: product.img,
     };
-
-    if (user) {
-      await createPost(cartItem);
-    } else {
-      return navigate("/signup");
+    console.log(user);
+    if (!user) {
+      return navigate("/login");
     }
+    await createPost(cartItem);
+
     if (responseInfo.isSuccess == false) {
       return toast("Successfully Added product");
     }
@@ -30,12 +29,14 @@ const Button = ({ product }) => {
 
   return (
     <div>
-      <button
-        onClick={() => handleAddtoCart(product)}
-        className="bg-black w-full  text-white h-11 rounded hover:bg-primary duration-500"
-      >
-        Add To Cart
-      </button>
+      <div>
+        <button
+          onClick={() => handleAddtoCart(product)}
+          className="bg-black w-full  text-white h-11 rounded hover:bg-primary duration-500"
+        >
+          Add To Cart
+        </button>
+      </div>
     </div>
   );
 };

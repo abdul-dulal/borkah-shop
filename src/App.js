@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navbar from "./components/Navbar/Navbar";
+import About from "./components/pages/about/About";
 import BlogCategory from "./components/pages/blog/BlogCategory";
 import Sinlgeblog from "./components/pages/blog/Sinlgeblog";
 import Category from "./components/pages/home/Category";
@@ -13,6 +14,7 @@ import EditProfile from "./components/pages/Myaccount/EditProfile";
 import Myaccount from "./components/pages/Myaccount/Myaccount";
 import OrderHistory from "./components/pages/Myaccount/OrderHistory";
 import SearchResult from "./components/pages/shop/SearchResult";
+import PrivateRoute from "./components/Route/PrivateRoute";
 import { PublicRoute } from "./components/Route/PublicRoute";
 import Footer from "./components/shere/Footer";
 export const backgroundContext = React.createContext();
@@ -31,7 +33,15 @@ function App() {
           <Route path="/singleproduct" element={<SingleProduct />} />
           <Route path="/blog/:blogId" element={<Sinlgeblog />} />
           <Route path="/category" element={<BlogCategory />} />
-          <Route path="/myaccount" element={<Myaccount />}>
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/myaccount"
+            element={
+              <PrivateRoute>
+                <Myaccount />
+              </PrivateRoute>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path="editProfile" element={<EditProfile />} />
             <Route path="editAddress" element={<EditAddress />} />

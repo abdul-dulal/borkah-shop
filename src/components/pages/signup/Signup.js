@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLock2Line } from "react-icons/ri";
 import { GiConfirmed } from "react-icons/gi";
@@ -10,17 +13,18 @@ import axios from "axios";
 import Loading from "../../shere/Loading";
 import auth from "../../../Firebaseinit";
 import Sociallogin from "../../shere/Sociallogin";
+import { toast } from "react-toastify";
 const Signup = () => {
   const [agree, setAgree] = useState(false);
   const [passError, setPassError] = useState("");
-
+  const [user] = useAuthState(auth);
+  console.log(user);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-
   const [createUserWithEmailAndPassword, luser, loading] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
@@ -35,12 +39,12 @@ const Signup = () => {
     } else {
       setPassError("Password do not match");
     }
-    axios
-      .post("http://localhost:3000/user/signup", {
-        email: data.email,
-        password: data.password,
-      })
-      .then((res) => res);
+
+    axios.post("http://localhost:3000/user/signup", {
+      email: data.email,
+      password: data.password,
+    });
+
     reset();
   };
 

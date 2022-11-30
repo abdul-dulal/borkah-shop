@@ -100,19 +100,6 @@ const Navbar = () => {
                 Contact
               </NavLink>
             </li>
-            {user ? (
-              <Logout />
-            ) : (
-              <li>
-                <NavLink
-                  to="signup"
-                  className="hover:text-primary hover:bg-white"
-                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
-                >
-                  Signup
-                </NavLink>
-              </li>
-            )}
           </ul>
         </div>
         <div className="flex  gap-5">
@@ -123,7 +110,7 @@ const Navbar = () => {
                   toggleModal(!modalShown);
                 }}
               >
-                <AiOutlineShoppingCart className="text-2xl font-bold" />
+                <AiOutlineShoppingCart className="text-2xl font-bold mt-6" />
               </button>
               <Mainmodal
                 shown={modalShown}
@@ -140,44 +127,46 @@ const Navbar = () => {
               </p>
             </div>
           </div>
-          <div className="dropdown dropdown-end ">
-            <label tabIndex="0" className="">
-              {user ? (
-                <img
-                  src={user.photoURL}
-                  onClick={handleHide}
-                  className="w-8 h-8 rounded-full cursor-pointer"
-                  alt=""
-                />
-              ) : (
-                <img
-                  src={avatar}
-                  onClick={handleHide}
-                  className="w-8 h-8  cursor-pointer"
-                  alt=""
-                />
-              )}
-            </label>
-            {hide ? (
-              ""
-            ) : (
-              <>
-                <ul
-                  tabIndex="0"
-                  className="dropdown-content py-10 menu ml-4 p-2 bg-base-100 w-52"
-                >
-                  <li className=" text-primary">
-                    <Link to="/myaccount">My Account</Link>
+
+          <ul className="lg:flex hidden menu menu-horizontal   z-50  gap-12 font-semibold ">
+            <li tabindex="0" className="z-50 menu menu-horizontal">
+              <Link to="" className="hover:text-primary bg-white">
+                {user ? (
+                  <img
+                    src={user.photoURL}
+                    onClick={handleHide}
+                    className="w-8 h-8 rounded-full cursor-pointer"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src={avatar}
+                    onClick={handleHide}
+                    className="w-8 h-8  cursor-pointer"
+                    alt=""
+                  />
+                )}
+              </Link>
+              <ul class="p-2  w-44  -ml-10  duration-1000  bg-white text-primary">
+                <li className="hover:bg-primary bg-white hover:text-white  text-base px-3 cursor-pointer">
+                  <Link to="/myaccount">My Account</Link>
+                </li>
+                <hr />
+                {user ? (
+                  <Logout />
+                ) : (
+                  <li>
+                    <Link
+                      to="signup"
+                      className="hover:bg-primary hover:text-white py-3 text-base px-7 cursor-pointer "
+                    >
+                      Signup
+                    </Link>
                   </li>
-                  <hr />
-                  <li className=" text-primary">
-                    <Link to="/setting">Setting</Link>
-                  </li>
-                  <hr />
-                </ul>
-              </>
-            )}
-          </div>
+                )}
+              </ul>
+            </li>
+          </ul>
         </div>
 
         <Submenu />

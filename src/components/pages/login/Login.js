@@ -28,10 +28,13 @@ const Login = () => {
   }
   const onSubmit = async (data) => {
     signInWithEmailAndPassword(data.email, data.password);
-    const { data: result } = await axios.post("flash-dealsuser/login", {
-      email: data.email,
-      password: data.password,
-    });
+    const { data: result } = await axios.post(
+      "http://localhost:3000/user/login",
+      {
+        email: data.email,
+        password: data.password,
+      }
+    );
 
     localStorage.setItem("token", result);
   };
@@ -137,7 +140,7 @@ const Login = () => {
               <br />
               <input
                 type="submit"
-                value="Register"
+                value="Login"
                 className={`lg:w-96 w-80 h-14 bg-[#FF6A00] text-white rounded-md cursor-pointer `}
               />
               <p className="text-center mt-4">

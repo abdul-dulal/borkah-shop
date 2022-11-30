@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 import auth from "../../Firebaseinit";
 import { TypeAnimation } from "react-type-animation";
+import { toast } from "react-toastify";
 
 const Sociallogin = () => {
   const [signInWithGoogle, gUser, gLoading] = useSignInWithGoogle(auth);
@@ -19,6 +20,7 @@ const Sociallogin = () => {
   const navigate = useNavigate();
   if (gUser || gitUser || fbUser) {
     navigate("/");
+    toast("Well come to Our application");
   }
 
   if (gLoading || gitLoading || fbLoading) {
