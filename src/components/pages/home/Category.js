@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import shop from "../../../assets/img/slider/borkha-slider-1.jpg";
+import Loading from "../../shere/Loading";
 import CategoryItems from "./CategoryItems";
 const Category = () => {
   const [items, setItem] = useState([]);
@@ -13,8 +14,10 @@ const Category = () => {
       .get(
         `https://borkha-shop.onrender.com/product/api/v1/getbyCategory?category=${category}`
       )
-      .then((res) => setItem(res.data));
-    setIloading(true);
+      .then((res) => {
+        setItem(res.data);
+        setIloading(true);
+      });
   }, [category]);
   return (
     <div className="relative">
@@ -39,11 +42,15 @@ const Category = () => {
           </ul>
         </div>
       </div>
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-5 md:px-20 px-8  my-16 relative">
-        {items.map((item) => (
-          <CategoryItems key={item._id} item={item} loading={isLoading} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-5 md:px-20 px-8  my-16 relative">
+          {items.map((item) => (
+            <CategoryItems key={item._id} item={item} loading={isLoading} />
+          ))}
+        </div>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 };

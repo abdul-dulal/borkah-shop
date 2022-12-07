@@ -15,9 +15,6 @@ const Slitdertext = ({ title }) => {
       <p className="text-white md:block hidden">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. totam?
       </p>
-      <button className="bg-white w-44 h-12 rounded text-primary mt-12">
-        Shop Now
-      </button>
     </div>
   );
 };

@@ -36,9 +36,9 @@ const Heilight = () => {
           Resent Products
         </button>
       </div>
-      {toggleText == "bestSelling" && <BestSelling />}
-      {toggleText == "topRated" && <TopPrice />}
-      {toggleText == "resent" && <ResentProduct />}
+      {toggleText === "bestSelling" && <BestSelling />}
+      {toggleText === "topRated" && <TopPrice />}
+      {toggleText === "resent" && <ResentProduct />}
     </div>
   );
 };

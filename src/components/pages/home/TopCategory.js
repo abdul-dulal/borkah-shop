@@ -11,6 +11,7 @@ import Title from "../../shere/Title";
 const TopCategory = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     axios
       .get("https://borkha-shop.onrender.com/product/api/v1/getAllProudct")

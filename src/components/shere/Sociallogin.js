@@ -31,33 +31,26 @@ const Sociallogin = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen  bg-white shadow-lg  ">
+    <div className="flex items-center justify-center  bg-white mb-10">
       <div className="text-center px-8 ">
-        <TypeAnimation
-          sequence={[
-            "W E L C O M E T O B O R K H A S H O P ",
-            1000,
-            " W E L C O M E T O B O R K H A S H O P",
-            1000,
-          ]}
-          style={{ fontSize: "1.5em" }}
-          wrapper="h2"
-          repeat={Infinity}
-        />
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when
-        </p>
         <div className=" mt-8">
           <button onClick={() => signInWithGoogle()}>
-            <AiOutlineGoogle className="text-4xl bg-gray-200 text-primary p-2 hover:bg-primary hover:text-white duration-1000 rounded-full " />
+            <AiOutlineGoogle
+              title="Login With Google"
+              className="text-4xl bg-gray-200 text-primary p-2 hover:bg-primary hover:text-white duration-1000 rounded-full "
+            />
           </button>
           <button onClick={() => signInWithFacebook()}>
-            <FaFacebookF className="text-4xl bg-gray-200 text-[#4867AA]  p-2 hover:bg-[#4867AA] hover:text-white duration-1000 rounded-full ml-5" />
+            <FaFacebookF
+              title="Login With Facebook"
+              className="text-4xl bg-gray-200 text-[#4867AA]  p-2 hover:bg-[#4867AA] hover:text-white duration-1000 rounded-full ml-5"
+            />
           </button>
           <button onClick={() => signInWithGithub()}>
-            <AiOutlineGithub className="text-4xl bg-gray-200 text-[#161B22]  p-2 hover:bg-[#161B22] hover:text-white duration-1000 rounded-full ml-5 " />
+            <AiOutlineGithub
+              title="Login With Github"
+              className="text-4xl bg-gray-200 text-[#161B22]  p-2 hover:bg-[#161B22] hover:text-white duration-1000 rounded-full ml-5 "
+            />
           </button>
         </div>
       </div>

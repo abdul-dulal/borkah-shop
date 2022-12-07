@@ -7,9 +7,11 @@ import ReactPaginate from "react-paginate";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import { BsStopwatch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../shere/Loading";
 const Showblog = () => {
   const [blogs, setblog] = useState([]);
   const [pageCount, setpageCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleblog = (id) => {
     navigate(`/blog/${id}`);
@@ -23,6 +25,7 @@ const Showblog = () => {
       const data = await res.json();
       setpageCount(Math.ceil(8 / limit));
       setblog(data.results);
+      setLoading(true);
     };
 
     getComments();
@@ -49,37 +52,41 @@ const Showblog = () => {
   };
   return (
     <div>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10 my-16 items-center">
-        {blogs.map((blog) => (
-          <div>
-            <img src={blog.blogImg} alt="" />
-            <p className="flex items-center my-3 gap-1">
-              <BsStopwatch />
-              {new Date(blog.createdAt).toLocaleDateString(
-                "en-US",
-                DATE_OPTIONS
-              )}
-            </p>
-            <h1
-              className="text-xl font-semibold my-1 hover:text-primary line-clamp-1   cursor-pointer"
-              onClick={() => handleblog(blog._id)}
-            >
-              {blog.blogTitle}
-            </h1>
-            <p className="leading-7	text-[15px] ">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old.…
-            </p>
-            <button
-              onClick={() => handleblog(blog._id)}
-              className="flex items-center text-base font-bold text-primary mt-2 hover:translate-x-3 duration-700 hover:text-black"
-            >
-              Read More <GoTriangleRight />
-            </button>
-          </div>
-        ))}
-      </div>
+      {loading ? (
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10 my-16 items-center">
+          {blogs.map((blog) => (
+            <div>
+              <img src={blog.blogImg} alt="" />
+              <p className="flex items-center my-3 gap-1">
+                <BsStopwatch />
+                {new Date(blog.createdAt).toLocaleDateString(
+                  "en-US",
+                  DATE_OPTIONS
+                )}
+              </p>
+              <h1
+                className="text-xl font-semibold my-1 hover:text-primary line-clamp-1   cursor-pointer"
+                onClick={() => handleblog(blog._id)}
+              >
+                {blog.blogTitle}
+              </h1>
+              <p className="leading-7	text-[15px] ">
+                Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from
+                45 BC, making it over 2000 years old.…
+              </p>
+              <button
+                onClick={() => handleblog(blog._id)}
+                className="flex items-center text-base font-bold text-primary mt-2 hover:translate-x-3 duration-700 hover:text-black"
+              >
+                Read More <GoTriangleRight />
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <Loading />
+      )}
       <div className="my-10 ">
         <ReactPaginate
           previousLabel={<FaAngleLeft />}

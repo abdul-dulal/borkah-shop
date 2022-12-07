@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
+import Loading from "../../shere/Loading";
 import CategoryItems from "../home/CategoryItems";
 import Sidebar from "../home/Sidebar";
 
@@ -56,15 +57,19 @@ const Index = () => {
         </div>
         <div className="lg:col-start-2 lg:col-end-4 w-full  ">
           <div>
-            <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
-              {products.map((product) => (
-                <CategoryItems
-                  key={product._id}
-                  item={product}
-                  loading={loading}
-                />
-              ))}
-            </div>
+            {loading ? (
+              <div className="grid md:grid-cols-4 grid-cols-2 gap-4">
+                {products.map((product) => (
+                  <CategoryItems
+                    key={product._id}
+                    item={product}
+                    loading={loading}
+                  />
+                ))}
+              </div>
+            ) : (
+              <Loading />
+            )}
             <div className="my-16 flex justify-center ">
               <ReactPaginate
                 previousLabel={<FaAngleLeft />}

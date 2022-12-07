@@ -13,7 +13,7 @@ import Blog from "./Blog";
 const Home = () => {
   return (
     <div>
-      {/* <Slider /> */}
+      <Slider />
       <TopCategory />
       <FeaturedProduct />
       <HijabItem />
