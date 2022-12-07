@@ -13,9 +13,9 @@ const MenuModal = ({ setMenu }) => {
       className="  overflow-x-hidden overflow-y-auto inset-0  -top-2 left-0 fixed  absulate right-0 mt-2 w-full h-screen px-10 rounded-md shadow-lg py-1 bg-[rgba(0,0,0,0.9)] "
     >
       <div className="">
-        <div className="flex justify-end">
+        <div className="flex justify-end ">
           <MdClear
-            className=" text-white text-4xl mt-3"
+            className=" text-white text-4xl mt-3 cursor-pointer"
             onClick={() => setMenu(false)}
           />
         </div>

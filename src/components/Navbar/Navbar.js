@@ -16,7 +16,6 @@ import Category from "./Category";
 const Navbar = () => {
   const [hide, setHide] = useState(true);
   const [modalShown, toggleModal] = useState(false);
-  const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const { data } = useGetCartItemsbyuserQuery(user?.email);
 
@@ -30,7 +29,7 @@ const Navbar = () => {
   return (
     <div>
       <HeaderTop />
-      <div className="flex justify-between px-20 h-24 items-center  object-contain">
+      <div className="flex justify-between md:px-20 px-10 h-24 items-center  object-contain">
         <div>
           <NavLink to="home">
             <img src={logo} alt="" />

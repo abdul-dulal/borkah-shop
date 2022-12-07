@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  useAuthState,
   useSignInWithFacebook,
   useSignInWithGithub,
   useSignInWithGoogle,
@@ -18,6 +19,8 @@ const Sociallogin = () => {
   const [signInWithGithub, gitUser, gitLoading] = useSignInWithGithub(auth);
   const [signInWithFacebook, fbUser, fbLoading] = useSignInWithFacebook(auth);
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
+
   if (gUser || gitUser || fbUser) {
     navigate("/");
     toast("Well come to Our application");
@@ -48,7 +51,7 @@ const Sociallogin = () => {
         </p>
         <div className=" mt-8">
           <button onClick={() => signInWithGoogle()}>
-            <AiOutlineGoogle className="text-4xl bg-gray-200 text-red-600  p-2 hover:bg-[#DB4437] hover:text-white duration-1000 rounded-full " />
+            <AiOutlineGoogle className="text-4xl bg-gray-200 text-primary p-2 hover:bg-primary hover:text-white duration-1000 rounded-full " />
           </button>
           <button onClick={() => signInWithFacebook()}>
             <FaFacebookF className="text-4xl bg-gray-200 text-[#4867AA]  p-2 hover:bg-[#4867AA] hover:text-white duration-1000 rounded-full ml-5" />

@@ -3,12 +3,18 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLock2Line } from "react-icons/ri";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSendPasswordResetEmail,
+} from "react-firebase-hooks/auth";
 import axios from "axios";
 import auth from "../../../Firebaseinit";
 import Loading from "../../shere/Loading";
 import Sociallogin from "../../shere/Sociallogin";
+import { useState } from "react";
+import { toast } from "react-toastify";
 const Login = () => {
+  const [email, setEmail] = useState();
   const {
     register,
     handleSubmit,
@@ -18,18 +24,22 @@ const Login = () => {
   let errorElement = "";
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
   const navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
+  const actionCodeSettings = {
+    url: "http://localhost:3001/login",
+  };
 
   if (error) {
     errorElement = error.message;
   }
   const onSubmit = async (data) => {
+    setEmail(data.email);
     signInWithEmailAndPassword(data.email, data.password);
     const { data: result } = await axios.post(
-      "http://localhost:3000/user/login",
+      "https://borkha-shop.onrender.com/user/login",
       {
         email: data.email,
         password: data.password,
@@ -134,14 +144,26 @@ const Login = () => {
               <label>
                 <div className="flex justify-between my-3">
                   <p>Remember Me</p>
-                  <p>Forget Password?</p>
+                  <button
+                    onClick={async () => {
+                      const success = await sendPasswordResetEmail(
+                        email,
+                        actionCodeSettings
+                      );
+                      if (success) {
+                        toast("Sent email");
+                      }
+                    }}
+                  >
+                    Forget password
+                  </button>
                 </div>
               </label>
               <br />
               <input
                 type="submit"
                 value="Login"
-                className={`lg:w-96 w-80 h-14 bg-[#FF6A00] text-white rounded-md cursor-pointer `}
+                className={`lg:w-96 w-80 h-14 bg-primary text-white rounded-md cursor-pointer `}
               />
               <p className="text-center mt-4">
                 Don't have an account? Register here

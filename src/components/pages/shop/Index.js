@@ -17,7 +17,7 @@ const Index = () => {
   useEffect(() => {
     const getComments = async () => {
       const res = await fetch(
-        `http://localhost:3000/product/pagination?page=1&limit=${limit}&lowest=${lowest}&highest=${highest}`
+        `https://borkha-shop.onrender.com/product/pagination?page=1&limit=${limit}&lowest=${lowest}&highest=${highest}`
       );
       const data = await res.json();
       setLoading(true);
@@ -28,7 +28,7 @@ const Index = () => {
   }, [limit, lowest, highest]);
   const fetchComments = async (currentPage) => {
     const res = await fetch(
-      `http://localhost:3000/product/pagination?page=${currentPage}&limit=${limit}&lowest=${lowest}&highest=${highest}`
+      `https://borkha-shop.onrender.com/product/pagination?page=${currentPage}&limit=${limit}&lowest=${lowest}&highest=${highest}`
     );
     const data = await res.json();
     return data;

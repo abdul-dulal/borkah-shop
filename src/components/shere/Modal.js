@@ -16,12 +16,9 @@ import {
   LinkedinIcon,
   TwitterIcon,
 } from "react-share";
-import { backgroundContext } from "../../App";
-
 const Modal = ({ setModal, id }) => {
   const [item, setItems] = useState();
   const [quantity, setQuantity] = useState(1);
-  const [popupWith, setPopupWith] = React.useContext(backgroundContext);
   const [loading, setIloading] = useState(false);
   const navigate = useNavigate();
   const fbShare = "https://www.facebook.com/";
@@ -29,7 +26,7 @@ const Modal = ({ setModal, id }) => {
   const lkShare = "https://www.linkedin.com/feed/";
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/product/api/v1/getbyId/${id}`)
+      .get(`https://borkha-shop.onrender.com/product/api/v1/getbyId/${id}`)
       .then((res) => setItems(res.data));
     setIloading(true);
   }, [id]);
@@ -44,7 +41,7 @@ const Modal = ({ setModal, id }) => {
 
             <MdClear
               className="  text-4xl  cursor-pointer"
-              onClick={() => [setModal(false), setPopupWith(false)]}
+              onClick={() => setModal(false)}
             />
           </div>
           <p className="border-solid border border-primary mt-7"></p>

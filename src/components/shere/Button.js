@@ -9,21 +9,25 @@ const Button = ({ product }) => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const [createPost, responseInfo] = useCreatePostMutation();
+
   const handleAddtoCart = async (product) => {
     const cartItem = {
       name: product.name,
-      price: product.price,
       user: user?.email,
       img: product.img,
+      quantity: product.quantity,
+      price: product.price,
     };
-    console.log(user);
+
     if (!user) {
       return navigate("/login");
     }
     await createPost(cartItem);
-
-    if (responseInfo.isSuccess == false) {
+    console.log(responseInfo.data);
+    if (responseInfo.isSuccess === false) {
       return toast("Successfully Added product");
+    } else {
+      toast.error("Product already exist in cart");
     }
   };
 

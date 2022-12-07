@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const postApi = createApi({
   reducerPath: "postApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://borkha-shop.onrender.com/" }),
   tagTypes: ["Task"],
   endpoints: (builder) => ({
     getCartItemsbyuser: builder.query({
@@ -23,6 +23,17 @@ export const postApi = createApi({
           headers: {
             "Content-type": "application/json; charset=UTF-8",
           },
+        };
+      },
+      invalidatesTags: ["Task"],
+    }),
+    updateQuantity: builder.mutation({
+      query: (updateItem) => {
+        const { name, ...data } = updateItem;
+        return {
+          url: `cart/updateQuantity/${name}`,
+          method: "PUT",
+          body: data,
         };
       },
       invalidatesTags: ["Task"],
@@ -58,4 +69,5 @@ export const {
   useCreatePostMutation,
   useDeletePostMutation,
   useDeleteManyMutation,
+  useUpdateQuantityMutation,
 } = postApi;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Navbar from "./components/Navbar/Navbar";
@@ -17,40 +17,59 @@ import SearchResult from "./components/pages/shop/SearchResult";
 import PrivateRoute from "./components/Route/PrivateRoute";
 import { PublicRoute } from "./components/Route/PublicRoute";
 import Footer from "./components/shere/Footer";
-export const backgroundContext = React.createContext();
+
 function App() {
-  const [popupWith, setPopupWith] = useState(false);
   return (
-    <div className={`${popupWith ? "bg-gray-200" : ""}`}>
+    <div>
       <Navbar />
-      <backgroundContext.Provider value={[popupWith, setPopupWith]}>
-        <Routes>
-          {PublicRoute.map(({ path, Component }) => (
-            <Route path={path} element={<Component />} />
-          ))}
-          <Route path="/searchby/:text" element={<SearchResult />} />
-          <Route path="/shop/:category" element={<Category />} />
-          <Route path="/singleproduct" element={<SingleProduct />} />
-          <Route path="/blog/:blogId" element={<Sinlgeblog />} />
-          <Route path="/category" element={<BlogCategory />} />
-          <Route path="/about" element={<About />} />
-          <Route
-            path="/myaccount"
-            element={
-              <PrivateRoute>
-                <Myaccount />
-              </PrivateRoute>
-            }
-          >
-            <Route index element={<Dashboard />} />
-            <Route path="editProfile" element={<EditProfile />} />
-            <Route path="editAddress" element={<EditAddress />} />
-            <Route path="orderHistory" element={<OrderHistory />} />
-            <Route path="editPassword" element={<EditPassword />} />
-          </Route>
-        </Routes>
-      </backgroundContext.Provider>
-      <ToastContainer />
+
+      <Routes>
+        {PublicRoute.map(({ path, Component }) => (
+          <Route path={path} element={<Component />} />
+        ))}
+        <Route path="/searchby/:text" element={<SearchResult />} />
+        <Route path="/shop/:category" element={<Category />} />
+        <Route path="/singleproduct" element={<SingleProduct />} />
+        <Route path="/blog/:blogId" element={<Sinlgeblog />} />
+        <Route path="/category" element={<BlogCategory />} />
+        <Route
+          path="/about"
+          element={
+            <PrivateRoute>
+              <About />
+            </PrivateRoute>
+          }
+        />
+
+        {/* nested route */}
+        <Route
+          path="/myaccount"
+          element={
+            <PrivateRoute>
+              <Myaccount />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="editProfile" element={<EditProfile />} />
+          <Route path="editAddress" element={<EditAddress />} />
+          <Route path="orderHistory" element={<OrderHistory />} />
+          <Route path="editPassword" element={<EditPassword />} />
+        </Route>
+      </Routes>
+
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Footer />
     </div>
   );

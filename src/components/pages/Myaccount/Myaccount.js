@@ -58,13 +58,7 @@ const Myaccount = () => {
               </NavLink>
             </li>
             <li className="h-12 cursor-pointer  p-3 text-gray-400 border ">
-              <NavLink
-                to="contact"
-                className="hover:text-primary"
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              >
-                Logout
-              </NavLink>
+              <Logout />
             </li>
           </ul>
         </div>

@@ -18,7 +18,7 @@ const Showblog = () => {
   useEffect(() => {
     const getComments = async () => {
       const res = await fetch(
-        `http://localhost:3000/blog/allData?page=1&limit=${limit}`
+        `https://borkha-shop.onrender.com/blog/allData?page=1&limit=${limit}`
       );
       const data = await res.json();
       setpageCount(Math.ceil(8 / limit));
@@ -29,7 +29,7 @@ const Showblog = () => {
   }, [limit]);
   const fetchComments = async (currentPage) => {
     const res = await fetch(
-      `http://localhost:3000/blog/allData?page=${currentPage}&limit=${limit}`
+      `https://borkha-shop.onrender.com/blog/allData?page=${currentPage}&limit=${limit}`
     );
     const data = await res.json();
     return data;

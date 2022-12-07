@@ -11,7 +11,7 @@ const Category = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/product/api/v1/getbyCategory?category=${category}`
+        `https://borkha-shop.onrender.com/product/api/v1/getbyCategory?category=${category}`
       )
       .then((res) => setItem(res.data));
     setIloading(true);

@@ -23,7 +23,7 @@ const Sidebar = ({
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/product/api/v1/topRatedProduct?category=${categoryItem}&price=1000`
+        `https://borkha-shop.onrender.com/product/api/v1/topRatedProduct?category=${categoryItem}&price=1000`
       )
       .then((res) => setToprated(res.data));
   }, [categoryItem]);

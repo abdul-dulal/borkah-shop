@@ -2,20 +2,26 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { AiTwotoneStar } from "react-icons/ai";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import shop from "../../../assets/img/slider/borkha-slider-1.jpg";
+import { useLocation, useNavigate } from "react-router-dom";
 import SliderImage from "react-zoom-slider";
 import Description from "./ZoomSlider";
 import Sidebar from "./Sidebar";
 import ReletedProduct from "./ReletedProduct";
 import Featuredbanner from "./Featuredbanner";
+import { useCreatePostMutation } from "../../service/Post";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
+import auth from "../../../Firebaseinit";
 const SingleProduct = () => {
   const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [createPost, responseInfo] = useCreatePostMutation();
   const location = useLocation();
   const id = location.state._id;
   const { name, price, review, img, category } = product;
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
+
   const categoryList = [
     "borkha",
     "niqab",
@@ -26,11 +32,33 @@ const SingleProduct = () => {
   ];
   const categoryItem = categoryList[Math.floor(Math.random() * 6) + 1];
 
+  const plain = price * quantity;
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/product/api/v1/getbyId/${id}`)
+      .get(`https://borkha-shop.onrender.com/product/api/v1/getbyId/${id}`)
       .then((res) => setProduct(res.data));
   }, [id]);
+
+  const handleAddtoCart = async (product) => {
+    const cartItem = {
+      name,
+      user: user?.email,
+      img,
+      quantity,
+      price: plain,
+    };
+
+    if (!user) {
+      return navigate("/login");
+    }
+    await createPost(cartItem);
+    console.log(responseInfo.isSuccess);
+    if (responseInfo?.isSuccess === false) {
+      return toast("Successfully Added product");
+    } else {
+      toast.error("Product already exist in cart");
+    }
+  };
 
   return (
     <div className="relative">
@@ -54,7 +82,7 @@ const SingleProduct = () => {
         <div className="  space-y-2 ">
           <h2 className="text-2xl font-bold">{name?.slice(0, 48)}</h2>
           <p className="text-primary text-base font-bold">
-            ${price?.toLocaleString("en-US")}
+            ${plain.toLocaleString("en-US")}
           </p>
           <p className="flex  pb-3">
             {review
@@ -92,7 +120,10 @@ const SingleProduct = () => {
             >
               +
             </button>
-            <button className="bg-primary text-white w-40 h-10 ml-5">
+            <button
+              className="bg-primary text-white w-40 h-10 ml-5"
+              onClick={handleAddtoCart}
+            >
               Add To Cart
             </button>
           </div>

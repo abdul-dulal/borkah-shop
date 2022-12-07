@@ -9,7 +9,7 @@ const Comment = ({ desc }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/blog/getAllBlog")
+      .get("https://borkha-shop.onrender.com/blog/getAllBlog")
       .then((res) => setallBlog(res.data));
   }, []);
 
@@ -31,10 +31,7 @@ const Comment = ({ desc }) => {
           ))}
         </div>
       </div>
-      <div className="flex justify-between mt-6">
-        <button>Previous</button>
-        <button onClick={""}>Next</button>
-      </div>
+
       <h1 className="text-2xl my-3 font-bold">Leave a Reply </h1>
       <form>
         <textarea

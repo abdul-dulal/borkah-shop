@@ -12,7 +12,7 @@ const BlogSidebar = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/blog/getAllBlog")
+      .get("https://borkha-shop.onrender.com/blog/getAllBlog")
       .then((res) => setallBlog(res.data));
   }, []);
   const DATE_OPTIONS = {
@@ -23,12 +23,12 @@ const BlogSidebar = () => {
   };
   return (
     <div className="bg-[#F7F7F7] px-10 pt-4 pb-10">
-      <input
+      {/* <input
         type="text"
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search Product..."
         className="h-12 lg:w-full sm:w-7/12 w-full border-2 rounded  my-8 px-3 outline-offset-0 outline-primary ring-0"
-      />
+      /> */}
       <p className="text-2xl font-bold my-3">Recent Posts</p>
       <p className="h-[1.5px] w-20 bg-primary"></p>
 

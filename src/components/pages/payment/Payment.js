@@ -17,7 +17,9 @@ const Payment = ({ open, setOpen }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/checkout/orderItem?user=${user?.email}`)
+      .get(
+        `https://borkha-shop.onrender.com/checkout/orderItem?user=${user?.email}`
+      )
       .then((res) => setOrder(res.data[0]));
   }, [user?.email]);
 

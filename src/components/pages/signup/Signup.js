@@ -17,15 +17,15 @@ import { toast } from "react-toastify";
 const Signup = () => {
   const [agree, setAgree] = useState(false);
   const [passError, setPassError] = useState("");
-  const [user] = useAuthState(auth);
-  console.log(user);
+  const [user, vloading] = useAuthState(auth);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-  const [createUserWithEmailAndPassword, luser, loading] =
+  const [createUserWithEmailAndPassword, signupUser, loading] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
   const navigate = useNavigate();
@@ -40,15 +40,16 @@ const Signup = () => {
       setPassError("Password do not match");
     }
 
-    axios.post("http://localhost:3000/user/signup", {
+    axios.post("https://borkha-shop.onrender.com/user/signup", {
       email: data.email,
       password: data.password,
     });
+    toast("Send email verification");
 
     reset();
   };
 
-  if (luser) {
+  if (signupUser && user?.emailVerified) {
     return navigate("/");
   }
 
@@ -170,7 +171,7 @@ const Signup = () => {
                 disabled={!agree}
                 type="submit"
                 value="Register"
-                className={`lg:w-96 w-80 h-14 bg-[#FF6A00] text-white rounded-md ${
+                className={`lg:w-96 w-80 h-14 bg-primary text-white rounded-md ${
                   !agree ? "cursor-not-allowed" : "cursor-pointer"
                 } `}
               />

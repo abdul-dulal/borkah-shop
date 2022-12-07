@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-const PaymentInfo = ({ data }) => {
+const PaymentInfo = ({ data, billing }) => {
   const location = useLocation();
 
   const price = data?.map((e) => e.price);
@@ -43,11 +43,19 @@ const PaymentInfo = ({ data }) => {
             $ {location?.state ? location?.state?.total : totalPrice}
           </p>
         </div>
-        <input
-          type="submit"
-          value="Place order"
-          className="uppercase bg-primary mt-6 cursor-pointer h-12 w-6/12 block mx-auto rounded text-white hover:bg-black"
-        />
+        {billing ? (
+          <input
+            type="submit"
+            value="Place order"
+            className="uppercase bg-primary mt-6 cursor-pointer h-12 w-6/12 block mx-auto rounded text-white hover:bg-black"
+          />
+        ) : (
+          <input
+            type="submit"
+            value="Place order"
+            className="uppercase bg-primary mt-6 cursor-pointer h-12 w-6/12 block mx-auto rounded text-white hover:bg-black"
+          />
+        )}
       </div>
     </div>
   );

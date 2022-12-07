@@ -1,51 +1,44 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import auth from "../../../Firebaseinit";
 
 const EditAddress = () => {
+  const [billing, setbilling] = useState();
+  const [city, setCity] = useState();
+  const [address, setAddress] = useState();
+  const [state, setstate] = useState();
+  const [country, setCountry] = useState();
   const [user] = useAuthState(auth);
-  const {
-    register,
-    handleSubmit,
 
-    reset,
-  } = useForm();
-  const handleAdded = (data) => {
-    const newUser = {
-      zip: data.zip,
-      address: data.address,
-      country: data.country,
-      state: data.state,
-      city: data.city,
-      user: user?.email,
-    };
-    fetch("https://e-trade-server.vercel.app/user/post-userInfo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
-    })
-      .then((res) => {
-        toast("successfylly added");
+  useEffect(() => {
+    axios
+      .get(
+        `https://borkha-shop.onrender.com/checkout/billingDetails?user=${user?.email}`
+      )
+      .then((res) => setbilling(res.data[0]));
+  }, [user?.email]);
 
-        return res.json();
-      })
-      .then((data) => {});
-
-    reset();
+  useEffect(() => {
+    setCity(billing?.city);
+    setstate(billing?.state);
+    setAddress(billing?.address);
+    setCountry(billing?.country);
+  }, [billing]);
+  const handleUpdate = (e) => {
+    e.preventDefault();
   };
   return (
     <div className="lg:ml-0 ml-10 md:mt-0 mt-14">
-      <form onSubmit={handleSubmit(handleAdded)}>
+      <form onSubmit={handleUpdate}>
         <div className="sm:flex lg:gap-10 gap-3 px-3">
           <div>
             <label className="font-semibold uppercase">Zip Code</label> <br />
             <input
               type="text"
-              {...register("zip")}
               class=" w-full  px-2 h-12 mt-3 focus:outline outline-none focus:outline-primary rounded-md  "
             />
           </div>
@@ -53,7 +46,8 @@ const EditAddress = () => {
             <label className="font-semibold uppercase">City</label> <br />
             <input
               type="text"
-              {...register("city")}
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
               class=" w-full  px-2 h-12 mt-3 focus:outline outline-none focus:outline-primary rounded-md  "
             />
           </div>
@@ -63,24 +57,28 @@ const EditAddress = () => {
             <label className="font-semibold uppercase">State</label> <br />
             <input
               type="text"
-              {...register("state")}
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
               class=" w-full px-2 h-12 mt-3 focus:outline outline-none focus:outline-primary rounded-md  "
             />
           </div>
           <div>
-            <label className="font-semibold uppercase">Country</label> <br />
+            <label className="font-semibold uppercase">State Address</label>{" "}
+            <br />
             <input
               type="text"
-              {...register("country")}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               class=" w-full px-2 h-12 mt-3 focus:outline outline-none focus:outline-primary rounded-md  "
             />
           </div>
         </div>
         <div className=" px-3 mt-5">
-          <label className="font-semibold uppercase block">state address</label>
+          <label className="font-semibold uppercase block">Country</label>
           <input
             type="text"
-            {...register("address")}
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
             class=" sm:w-80 w-full px-2 h-12 mt-3 focus:outline outline-none focus:outline-primary rounded-md  "
           />
         </div>

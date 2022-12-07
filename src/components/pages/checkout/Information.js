@@ -1,18 +1,30 @@
 import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../Firebaseinit";
-import { useGetCartItemsbyuserQuery } from "../../service/Post";
+import {
+  useCreateCheckoutMutation,
+  useGetCartItemsbyuserQuery,
+} from "../../service/Post";
 
 import PaymentInfo from "./PaymentInfo";
 
 const Information = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const [billing, setbilling] = useState([]);
+  const [phone, setPhone] = useState();
+  const [city, setCity] = useState();
+  const [address, setAddress] = useState();
+  const [state, setstate] = useState();
+  const [country, setCountry] = useState();
+
   const [user] = useAuthState(auth);
   const { data: cartitem } = useGetCartItemsbyuserQuery(user?.email);
+
   const navigate = useNavigate();
   const price = cartitem && cartitem.map((e) => e.price);
   const totalPrice =
@@ -21,32 +33,65 @@ const Information = () => {
       return x + y;
     });
 
-  const onSubmit = (data) => {
+  const name = user?.displayName.split(/\s+/);
+
+  const fname = name?.slice(0, 2).toString().split(",").join(" ");
+  const lname = name?.slice(2, name.length).toString().split(",").join(" ");
+  const newbilling = {
+    fname: fname,
+    lname: lname,
+    phone: parseFloat(phone),
+    city: city,
+    address: address,
+    state: state,
+    price: totalPrice,
+    user: user?.email,
+    item: cartitem?.length,
+    country: country,
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     axios
-      .post("http://localhost:3000/checkout/saveAddress", {
-        fname: data.fname,
-        lname: data.lname,
-        phone: parseFloat(data.phone),
-        city: data.city,
-        address: data.address,
-        state: data.state,
-        price: totalPrice,
-        user: user.email,
-        item: cartitem.length,
-        country: data.country,
-      })
+      .post("https://borkha-shop.onrender.com/checkout/saveAddress", newbilling)
       .then((res) => {
         if (res.data === "success") {
           toast.success("billing address added");
           navigate("/payment-method");
-          reset();
         } else {
           return toast.error(res?.data?.message?.slice());
         }
       });
   };
+  const hanleUpdate = (e) => {
+    e.preventDefault();
+
+    axios.put(
+      `https://borkha-shop.onrender.com/checkout/updatebillingDetails/${billing._id}`,
+      newbilling
+    );
+    navigate("/payment-method");
+  };
+
+  useEffect(() => {
+    setPhone(billing?.phone);
+    setCity(billing?.city);
+    setstate(billing?.state);
+    setAddress(billing?.address);
+    setCountry(billing?.country);
+  }, [billing]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://borkha-shop.onrender.com/checkout/billingDetails?user=${user?.email}`
+      )
+      .then((res) => setbilling(res.data[0]));
+  }, [user?.email]);
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={billing ? hanleUpdate : handleSubmit}>
       <div className="grid md:grid-cols-2 grid-cols-1  my-20 lg:px-20 px-10">
         <div className=" ">
           <h1 className="text-2xl   font-semibold ">Billing details</h1>
@@ -60,8 +105,8 @@ const Information = () => {
                 </label>
                 <input
                   type="text"
+                  value={fname}
                   placeholder="Jhon"
-                  {...register("fname")}
                   className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
                 />
               </div>
@@ -72,8 +117,8 @@ const Information = () => {
                 </label>
                 <input
                   type="text"
+                  value={lname}
                   placeholder="Doe"
-                  {...register("lname")}
                   className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
                 />
               </div>
@@ -85,8 +130,9 @@ const Information = () => {
                 </label>
                 <input
                   type="number"
+                  value={phone}
                   placeholder="017..."
-                  {...register("phone")}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
                 />
               </div>
@@ -98,7 +144,6 @@ const Information = () => {
                 </label>
                 <input
                   type="number"
-                  {...register("zip")}
                   placeholder="123..."
                   className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
                 />
@@ -111,7 +156,8 @@ const Information = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("city")}
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                   placeholder="xxx.."
                   className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
                 />
@@ -124,7 +170,8 @@ const Information = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("address")}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   placeholder="xxx.."
                   className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
                 />
@@ -137,8 +184,9 @@ const Information = () => {
                 </label>
                 <input
                   type="text"
+                  value={state}
                   placeholder="xxx..."
-                  {...register("state")}
+                  onChange={(e) => setstate(e.target.value)}
                   className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
                 />
               </div>
@@ -149,7 +197,8 @@ const Information = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("country")}
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
                   placeholder="xxx..."
                   className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
                 />
@@ -158,7 +207,7 @@ const Information = () => {
           </div>
         </div>
         <div>
-          <PaymentInfo data={cartitem} />
+          <PaymentInfo data={cartitem} billing={billing} />
         </div>
       </div>
     </form>

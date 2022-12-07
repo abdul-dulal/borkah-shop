@@ -7,7 +7,7 @@ const ResentProduct = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/product/api/v1/getAllProudct")
+      .get("https://borkha-shop.onrender.com/product/api/v1/getAllProudct")
       .then((res) => setResentProduct(res.data.slice(27, 45)));
     setLoading(true);
   }, []);

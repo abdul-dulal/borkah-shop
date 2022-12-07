@@ -12,7 +12,7 @@ const Blog = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:3000/blog/getAllBlog")
+      .get("https://borkha-shop.onrender.com/blog/getAllBlog")
       .then((res) => setBlog(res.data.slice(0, 3)));
   }, []);
   const DATE_OPTIONS = {

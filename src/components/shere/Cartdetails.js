@@ -28,7 +28,7 @@ const Cartdetails = ({ data, price }) => {
             {data.name}
           </p>
           <p> Price ${data.price}</p>
-          <p>Quantity :1 </p>
+          <p>Quantity :{data.quantity} </p>
         </div>
         <p
           className="text-xl cursor-pointer"

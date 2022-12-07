@@ -2,19 +2,15 @@ import React, { useState } from "react";
 import { AiTwotoneStar } from "react-icons/ai";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { backgroundContext } from "../../../App";
 import Modal from "../../../components/shere/Modal";
 import Button from "../../shere/Button";
 const CategoryItems = ({ item, loading }) => {
-  const [popupWith, setPopupWith] = React.useContext(backgroundContext);
-
   const { _id, name, review, price } = item;
   const [modal, setModal] = useState(false);
   const [id, setId] = useState();
   const handleShow = (id) => {
     setModal(true);
     setId(id);
-    setPopupWith(true);
   };
 
   return (

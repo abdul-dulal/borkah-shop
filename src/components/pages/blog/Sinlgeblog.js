@@ -13,7 +13,7 @@ const Sinlgeblog = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/blog/singleblog/${blogId}`)
+      .get(`https://borkha-shop.onrender.com/blog/singleblog/${blogId}`)
       .then((res) => setDesc(res.data));
   }, [blogId]);
   const DATE_OPTIONS = {
@@ -26,7 +26,7 @@ const Sinlgeblog = () => {
   return (
     <div>
       <Featuredbanner name={desc?.blogTitle} />
-      <div className="grid grid-cols-3 lg:px-20 px-10 my-20 gap-10">
+      <div className="grid lg:grid-cols-3 grid-cols-1 lg:px-20 px-10 my-20 gap-10">
         <div className="col-span-2">
           <img src={desc?.blogImg} alt="" />
           <h1 className="mt-5 text-2xl font-bold">{desc?.blogTitle}</h1>

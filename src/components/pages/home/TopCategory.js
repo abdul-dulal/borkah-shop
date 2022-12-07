@@ -13,7 +13,7 @@ const TopCategory = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/product/api/v1/getAllProudct")
+      .get("https://borkha-shop.onrender.com/product/api/v1/getAllProudct")
       .then((res) => setProduct(res.data));
     setLoading(true);
   }, []);

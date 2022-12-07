@@ -13,7 +13,9 @@ const BlogCategory = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/blog/getcategory?category=${category}`)
+      .get(
+        `https://borkha-shop.onrender.com/blog/getcategory?category=${category}`
+      )
       .then((res) => setCategoryBlog(res.data));
   }, [category]);
   const DATE_OPTIONS = {
