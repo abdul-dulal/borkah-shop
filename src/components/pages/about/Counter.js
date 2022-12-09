@@ -6,14 +6,13 @@ import skill from "../../../assets/img/about/woman.png";
 import client from "../../../assets/img/about/client.png";
 import exprience from "../../../assets/img/about/experience.png";
 import award from "../../../assets/img/about/award.png";
-import Fade from "react-reveal/Fade";
 import ScrollTrigger from "react-scroll-trigger";
 import { useState } from "react";
 const Counter = () => {
   const [counterOn, setCounteron] = useState(false);
   return (
     <div
-      className="lg:py-2 md:py-8 py-16 lg:px-20 px-10 mt-20 "
+      className="lg:py-2 md:py-8 py-16   mt-20 max-w-screen-2xl mx-auto "
       style={{
         background: `url(${counterbanner})`,
         backgroundPosition: "center",

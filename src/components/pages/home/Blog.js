@@ -13,12 +13,10 @@ const Blog = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    axios
-      .get("https://borkha-shop.onrender.com/blog/getAllBlog")
-      .then((res) => {
-        setBlog(res.data.slice(0, 3));
-        setLoading(true);
-      });
+    axios.get("http://localhost:3000/blog/getAllBlog").then((res) => {
+      setBlog(res.data.slice(0, 3));
+      setLoading(true);
+    });
   }, []);
   const DATE_OPTIONS = {
     weekday: "short",
@@ -30,7 +28,7 @@ const Blog = () => {
     navigate(`/blog/${id}`);
   };
   return (
-    <div>
+    <div className="max-w-screen-2xl mx-auto">
       <Title title="From The Blog" />
       {loading ? (
         <div className="grid md:grid-cols-3 grid-cols-1 lg:px-20 px-10 gap-10 my-14">

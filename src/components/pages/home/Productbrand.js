@@ -47,7 +47,7 @@ const Productbrand = () => {
     ],
   };
   return (
-    <div className="bg-[#F4F4F4]">
+    <div className="bg-[#F4F4F4] max-w-screen-2xl mx-auto">
       <Title title="Top Products Brands" />
       <div className="lg:px-20 px-10 py-20">
         <Slider {...settings}>

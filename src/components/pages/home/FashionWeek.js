@@ -5,7 +5,7 @@ const FashionWeek = () => {
   const navigate = useNavigate();
   return (
     <div
-      className="md:h-[86vh] h-auto w-full flex justify-center items-center md:my-0 py-5 "
+      className="md:h-[86vh] h-auto w-full flex justify-center items-center md:my-0 py-5 max-w-screen-2xl mx-auto"
       style={{
         background: `url(${women})`,
         backgroundPosition: "center",

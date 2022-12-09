@@ -8,7 +8,7 @@ const BestSelling = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     axios
-      .get("https://borkha-shop.onrender.com/product/api/v1/getAllProudct")
+      .get("http://localhost:3000/product/api/v1/getAllProudct")
       .then((res) => {
         setbestSelling(res.data.slice(3, 21));
         setLoading(true);

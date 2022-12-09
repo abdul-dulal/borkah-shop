@@ -12,7 +12,7 @@ const HijabItem = () => {
   useEffect(() => {
     axios
       .get(
-        "https://borkha-shop.onrender.com/product/api/v1/hijabItem?category=hijab&category=niqab"
+        "http://localhost:3000/product/api/v1/hijabItem?category=hijab&category=niqab"
       )
       .then((res) => {
         setHijab(res.data);
@@ -20,7 +20,7 @@ const HijabItem = () => {
       });
   }, []);
   return (
-    <div className="bg-[#F4F4F4] py-10">
+    <div className="bg-[#F4F4F4] py-10 max-w-screen-2xl mx-auto">
       <Title title="Hijab Items" />
       <div>
         {loading ? (

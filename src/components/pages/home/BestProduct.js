@@ -10,14 +10,14 @@ const BestProduct = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     axios
-      .get("https://borkha-shop.onrender.com/product/api/v1/getAllProudct")
+      .get("http://localhost:3000/product/api/v1/getAllProudct")
       .then((res) => {
         setbestProduct(res.data.slice(27, 45));
         setLoading(true);
       });
   }, []);
   return (
-    <div>
+    <div className="max-w-screen-2xl mx-auto">
       <Title title="Best choice Products" />
       <div>
         {loading ? (

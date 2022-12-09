@@ -45,7 +45,7 @@ export default function Feedback() {
   };
   return (
     <div
-      className="h-auto lg:py-40  w-full md:py-32 sm:py-20 py-16 xl:px-20 px-14 "
+      className="h-auto lg:py-40  w-full md:py-32 sm:py-20 py-16 xl:px-20 px-14 max-w-screen-2xl mx-auto "
       style={{
         background: `url(${bg})`,
         backgroundPosition: "center",

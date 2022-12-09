@@ -14,12 +14,12 @@ const TopCategory = () => {
 
   useEffect(() => {
     axios
-      .get("https://borkha-shop.onrender.com/product/api/v1/getAllProudct")
+      .get("http://localhost:3000/product/api/v1/getAllProudct")
       .then((res) => setProduct(res.data));
     setLoading(true);
   }, []);
   return (
-    <div>
+    <div className="max-w-screen-2xl mx-auto">
       {loading ? (
         <div className="bg-[#F4F4F4] py-10">
           <Title title="Top Categories Products" />

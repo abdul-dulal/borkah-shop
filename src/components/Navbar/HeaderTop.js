@@ -6,7 +6,7 @@ import { FaFacebookF, FaInstagramSquare } from "react-icons/fa";
 import { AiFillLinkedin } from "react-icons/ai";
 const HeaderTop = () => {
   return (
-    <div className="md:flex hidden  justify-between h-10 items-center bg-primary font-semibold text-sm px-20 ">
+    <div className="md:flex hidden  justify-between h-10 items-center bg-primary font-semibold text-sm px-20 max-w-screen-2xl mx-auto ">
       <div className="flex gap-8 text-white">
         <div className="flex gap-1 items-center">
           <HiPhone />

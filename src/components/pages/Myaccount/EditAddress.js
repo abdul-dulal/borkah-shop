@@ -16,9 +16,7 @@ const EditAddress = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://borkha-shop.onrender.com/checkout/billingDetails?user=${user?.email}`
-      )
+      .get(`http://localhost:3000/checkout/billingDetails?user=${user?.email}`)
       .then((res) => setbilling(res.data[0]));
   }, [user?.email]);
 

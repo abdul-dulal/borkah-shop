@@ -1,5 +1,4 @@
 import React from "react";
-import { useGetPostbyIdQuery } from "../../service/Post";
 import Featuredbanner from "../home/Featuredbanner";
 import Feedback from "../home/Feedback";
 import Aboutus from "./Aboutus";

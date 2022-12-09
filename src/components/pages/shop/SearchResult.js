@@ -17,7 +17,7 @@ const SearchResult = () => {
   useEffect(() => {
     const getComments = async () => {
       const res = await fetch(
-        `https://borkha-shop.onrender.com/product/search?name=${text}&page=1&limit=12`
+        `http://localhost:3000/product/search?name=${text}&page=1&limit=12`
       );
       const data = await res.json();
       console.log(data.results);
@@ -29,7 +29,7 @@ const SearchResult = () => {
   }, [limit, text]);
   const fetchComments = async (currentPage) => {
     const res = await fetch(
-      `https://borkha-shop.onrender.com/product/search?page=${currentPage}&limit=${limit}&name=${text}`
+      `http://localhost:3000/product/search?page=${currentPage}&limit=${limit}&name=${text}`
     );
     const data = await res.json();
     return data;

@@ -12,7 +12,7 @@ const ReletedProduct = ({ categoryItem }) => {
   useEffect(() => {
     axios
       .get(
-        `https://borkha-shop.onrender.com/product/api/v1/getbyCategory?category=${categoryItem}`
+        `http://localhost:3000/product/api/v1/getbyCategory?category=${categoryItem}`
       )
       .then((res) => setCategoryProduct(res.data));
     setloading(true);

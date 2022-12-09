@@ -12,7 +12,7 @@ const Category = () => {
   useEffect(() => {
     axios
       .get(
-        `https://borkha-shop.onrender.com/product/api/v1/getbyCategory?category=${category}`
+        `http://localhost:3000/product/api/v1/getbyCategory?category=${category}`
       )
       .then((res) => {
         setItem(res.data);
@@ -20,7 +20,7 @@ const Category = () => {
       });
   }, [category]);
   return (
-    <div className="relative">
+    <div className="relative max-w-screen-2xl  mx-auto">
       <div
         className="h-64 w-full   "
         style={{

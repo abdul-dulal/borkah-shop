@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import shop from "../../../assets/img/slider/borkha-slider-1.jpg";
 const Featuredbanner = ({ name }) => {
   return (
-    <div className="relative">
+    <div className="relative max-w-screen-2xl mx-auto">
       <div
         className="h-64 w-full   "
         style={{

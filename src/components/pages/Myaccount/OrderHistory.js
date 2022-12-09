@@ -11,7 +11,7 @@ const OrderHistory = () => {
 
   useEffect(() => {
     axios
-      .get(`https://borkha-shop.onrender.com/order/myOrder?user=${user?.email}`)
+      .get(`http://localhost:3000/order/myOrder?user=${user?.email}`)
       .then((res) => setOrder(res.data));
   }, [user?.email]);
   const DATE_OPTIONS = {
@@ -36,7 +36,7 @@ const OrderHistory = () => {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr>
+                <tr key={order._id}>
                   <th>{order.transactionId.slice(0, 7)} </th>
                   <td>
                     {" "}

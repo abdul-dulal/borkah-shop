@@ -5,7 +5,7 @@ import mission from "../../../assets/img/about/DZT9I6QWkAc9O8i.jpg";
 const OurMission = () => {
   const navigate = useNavigate();
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 lg:px-20 px-10 my-20 gap-6  items-center">
+    <div className="grid lg:grid-cols-2 grid-cols-1 lg:px-14 px-10 my-20 gap-6  items-center max-w-screen-2xl mx-auto">
       <div>
         <img src={mission} className="p-5" alt="" />
       </div>

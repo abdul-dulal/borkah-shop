@@ -3,7 +3,7 @@ import CountUp from "react-countup";
 
 const CounterUp = ({ end, img, title }) => {
   return (
-    <div className="lg:flex gap-4   ">
+    <div className="lg:flex gap-4   max-w-screen-2xl mx-auto ">
       <div className="flex justify-center ">
         <img src={img} alt="" />
       </div>

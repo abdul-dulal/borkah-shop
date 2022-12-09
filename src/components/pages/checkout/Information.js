@@ -35,8 +35,8 @@ const Information = () => {
 
   const name = user?.displayName.split(/\s+/);
 
-  const fname = name?.slice(0, 2).toString().split(",").join(" ");
-  const lname = name?.slice(2, name.length).toString().split(",").join(" ");
+  const fname = name?.slice(0, 1).toString().split(",").join(" ");
+  const lname = name?.slice(1, name.length).toString().split(",").join(" ");
   const newbilling = {
     fname: fname,
     lname: lname,
@@ -54,7 +54,7 @@ const Information = () => {
     e.preventDefault();
 
     axios
-      .post("https://borkha-shop.onrender.com/checkout/saveAddress", newbilling)
+      .post("http://localhost:3000/checkout/saveAddress", newbilling)
       .then((res) => {
         if (res.data === "success") {
           toast.success("billing address added");
@@ -68,7 +68,7 @@ const Information = () => {
     e.preventDefault();
 
     axios.put(
-      `https://borkha-shop.onrender.com/checkout/updatebillingDetails/${billing._id}`,
+      `http://localhost:3000/checkout/updatebillingDetails/${billing._id}`,
       newbilling
     );
     navigate("/payment-method");
@@ -84,14 +84,15 @@ const Information = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://borkha-shop.onrender.com/checkout/billingDetails?user=${user?.email}`
-      )
+      .get(`http://localhost:3000/checkout/billingDetails?user=${user?.email}`)
       .then((res) => setbilling(res.data[0]));
   }, [user?.email]);
 
   return (
-    <form onSubmit={billing ? hanleUpdate : handleSubmit}>
+    <form
+      onSubmit={billing ? hanleUpdate : handleSubmit}
+      className="max-w-screen-2xl mx-auto"
+    >
       <div className="grid md:grid-cols-2 grid-cols-1  my-20 lg:px-20 px-10">
         <div className=" ">
           <h1 className="text-2xl   font-semibold ">Billing details</h1>

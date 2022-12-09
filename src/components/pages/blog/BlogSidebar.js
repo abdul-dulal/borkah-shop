@@ -12,7 +12,7 @@ const BlogSidebar = () => {
 
   useEffect(() => {
     axios
-      .get("https://borkha-shop.onrender.com/blog/getAllBlog")
+      .get("http://localhost:3000/blog/getAllBlog")
       .then((res) => setallBlog(res.data));
   }, []);
   const DATE_OPTIONS = {
@@ -34,7 +34,7 @@ const BlogSidebar = () => {
 
       <div className="">
         {allBlog.map((blog) => (
-          <div className="flex flex-wrap gap-x-4 py-3">
+          <div key={blog._id} className="flex flex-wrap gap-x-4 py-3">
             <div className="">
               <img
                 src={blog.blogImg}

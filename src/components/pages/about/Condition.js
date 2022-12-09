@@ -3,7 +3,7 @@ import { FaTruck, FaIdCard, FaHeadset } from "react-icons/fa";
 import { GoSync } from "react-icons/go";
 const Condition = () => {
   return (
-    <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 my-10  gap-7 lg:px-20 px-10 ">
+    <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 my-10  gap-7 lg:px-20 px-10  max-w-screen-2xl  mx-auto">
       <ConditionDesc
         icon={<FaTruck />}
         title="Free shipping"

@@ -18,7 +18,7 @@ const Index = () => {
   useEffect(() => {
     const getComments = async () => {
       const res = await fetch(
-        `https://borkha-shop.onrender.com/product/pagination?page=1&limit=${limit}&lowest=${lowest}&highest=${highest}`
+        `http://localhost:3000/product/pagination?page=1&limit=${limit}&lowest=${lowest}&highest=${highest}`
       );
       const data = await res.json();
       setLoading(true);
@@ -29,7 +29,7 @@ const Index = () => {
   }, [limit, lowest, highest]);
   const fetchComments = async (currentPage) => {
     const res = await fetch(
-      `https://borkha-shop.onrender.com/product/pagination?page=${currentPage}&limit=${limit}&lowest=${lowest}&highest=${highest}`
+      `http://localhost:3000/product/pagination?page=${currentPage}&limit=${limit}&lowest=${lowest}&highest=${highest}`
     );
     const data = await res.json();
     return data;
@@ -44,7 +44,7 @@ const Index = () => {
 
   return (
     <div>
-      <div className="grid lg:grid-cols-3 grid-cols-1  gap-4 my-10  lg:px-20 px-10">
+      <div className="grid lg:grid-cols-3 grid-cols-1  gap-4 my-10  lg:px-20 px-10 max-w-screen-2xl  mx-auto">
         <div className="lg:col-span-1 col-span-full  lg:order-first order-last">
           <Sidebar
             range={true}

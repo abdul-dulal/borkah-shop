@@ -5,7 +5,6 @@ import LoginModal from "../login/LoginModal";
 const LoginRegister = () => {
   const [openLogin, setOpenLogin] = useState(false);
   const [openRegister, setOpenRegister] = useState(false);
-  console.log(openLogin);
   return (
     <div
       className={`flex justify-center items-center h-[500px] ${

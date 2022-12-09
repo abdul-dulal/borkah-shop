@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 export default function App() {
   const navigate = useNavigate();
   return (
-    <div className="relative">
+    <div className="relative max-w-screen-2xl mx-auto">
       <div className="">
         <Swiper
           direction={"vertical"}

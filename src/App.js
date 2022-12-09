@@ -25,21 +25,13 @@ function App() {
 
       <Routes>
         {PublicRoute.map(({ path, Component }) => (
-          <Route path={path} element={<Component />} />
+          <Route key={Math.random()} path={path} element={<Component />} />
         ))}
         <Route path="/searchby/:text" element={<SearchResult />} />
         <Route path="/shop/:category" element={<Category />} />
         <Route path="/singleproduct" element={<SingleProduct />} />
         <Route path="/blog/:blogId" element={<Sinlgeblog />} />
         <Route path="/category" element={<BlogCategory />} />
-        <Route
-          path="/about"
-          element={
-            <PrivateRoute>
-              <About />
-            </PrivateRoute>
-          }
-        />
 
         {/* nested route */}
         <Route

@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  useAuthState,
-  useCreateUserWithEmailAndPassword,
-} from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLock2Line } from "react-icons/ri";
 import { GiConfirmed } from "react-icons/gi";
 
 import axios from "axios";
-import Loading from "../../shere/Loading";
 import auth from "../../../Firebaseinit";
 import Sociallogin from "../../shere/Sociallogin";
 import { toast } from "react-toastify";
@@ -25,10 +21,9 @@ const RegisterModal = ({ openRegister, setOpenRegister }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
-  const [createUserWithEmailAndPassword, signupUser, loading] =
-    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [createUserWithEmailAndPassword, signupUser, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
 
   const navigate = useNavigate();
   const onSubmit = async (data) => {
@@ -42,13 +37,19 @@ const RegisterModal = ({ openRegister, setOpenRegister }) => {
       setPassError("Password do not match");
     }
 
-    axios.post("https://borkha-shop.onrender.com/user/signup", {
-      email: data.email,
-      password: data.password,
-    });
-    toast("Send email verification");
-
-    reset();
+    axios
+      .post("http://localhost:3000/user/signup", {
+        email: data.email,
+        password: data.password,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          toast("Send email verification");
+          toast("Well come to our application");
+        } else {
+          toast("You have already an account");
+        }
+      });
   };
 
   if (signupUser) {
@@ -56,7 +57,7 @@ const RegisterModal = ({ openRegister, setOpenRegister }) => {
   }
 
   if (loading) {
-    return <Loading />;
+    // return <Loading />;
   }
 
   return (

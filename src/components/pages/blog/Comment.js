@@ -9,7 +9,7 @@ const Comment = ({ desc }) => {
 
   useEffect(() => {
     axios
-      .get("https://borkha-shop.onrender.com/blog/getAllBlog")
+      .get("http://localhost:3000/blog/getAllBlog")
       .then((res) => setallBlog(res.data));
   }, []);
 

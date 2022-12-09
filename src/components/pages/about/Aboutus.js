@@ -8,7 +8,7 @@ import Fade from "react-reveal/Fade";
 const Aboutus = () => {
   const navigate = useNavigate();
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 lg:px-20 px-10 mt-20 gap-6  items-center">
+    <div className="grid lg:grid-cols-2 grid-cols-1 md:px-14 px-10 mt-20 gap-6 max-w-screen-2xl mx-auto items-center">
       <Fade left>
         <div>
           <img src={about} className="p-5" alt="" />

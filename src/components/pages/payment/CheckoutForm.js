@@ -25,7 +25,7 @@ const CheckoutForm = ({ order, setOpen }) => {
   const [deletePost] = useDeleteManyMutation();
 
   useEffect(() => {
-    fetch(`https://borkha-shop.onrender.com/create-payment-intent`, {
+    fetch(`http://localhost:3000/create-payment-intent`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const CheckoutForm = ({ order, setOpen }) => {
       };
 
       axios
-        .post("https://borkha-shop.onrender.com/order/myorder", {
+        .post("http://localhost:3000/order/myorder", {
           user: order.user,
           price: order.price,
           item: order.item,

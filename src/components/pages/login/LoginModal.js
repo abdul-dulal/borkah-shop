@@ -40,12 +40,14 @@ const LoginModal = ({ openLogin, setOpenLogin }) => {
     setEmail(data.email);
     signInWithEmailAndPassword(data.email, data.password);
     const { data: result } = await axios.post(
-      "https://borkha-shop.onrender.com/user/login",
+      "http://localhost:3000/user/login",
       {
         email: data.email,
         password: data.password,
       }
     );
+    toast("Well to our application");
+    console.log(result);
 
     localStorage.setItem("token", result);
   };
@@ -54,7 +56,7 @@ const LoginModal = ({ openLogin, setOpenLogin }) => {
   }
 
   if (loading) {
-    return <Loading />;
+    // return <Loading />;
   }
   return (
     <div>

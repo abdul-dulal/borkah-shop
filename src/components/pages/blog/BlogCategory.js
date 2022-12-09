@@ -13,9 +13,7 @@ const BlogCategory = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(
-        `https://borkha-shop.onrender.com/blog/getcategory?category=${category}`
-      )
+      .get(`http://localhost:3000/blog/getcategory?category=${category}`)
       .then((res) => setCategoryBlog(res.data));
   }, [category]);
   const DATE_OPTIONS = {
@@ -28,11 +26,11 @@ const BlogCategory = () => {
     navigate(`/blog/${id}`);
   };
   return (
-    <div className="grid xl:grid-cols-3 grid-cols-1 gap-10 my-14 lg:px-20 px-10">
+    <div className="grid xl:grid-cols-3 grid-cols-1 gap-10 my-14 lg:px-20 px-10 max-w-screen-2xl  mx-auto">
       <div className="col-span-2 ">
         <div className="grid lg:grid-cols-3 md:grid-cols-2 first-letter: gap-10 ">
           {cateogryBlog.map((blog) => (
-            <div>
+            <div key={blog._id}>
               <img src={blog.blogImg} alt="" />
               <p className="flex items-center my-3 gap-1">
                 <BsStopwatch />

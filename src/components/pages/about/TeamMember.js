@@ -7,7 +7,7 @@ import team3 from "../../../assets/img/about/team-member-01.jpg";
 import team4 from "../../../assets/img/about/team-member-03.jpg";
 const TeamMember = () => {
   return (
-    <div>
+    <div className="max-w-screen-2xl  mx-auto">
       <Title title="Our Team Members" />
       <div className="grid md:grid-cols-4  grid-cols-2 my-14  gap-7 lg:px-20 px-10 ">
         <TeamDesc team={team1} name="Tasfia Jannat" deg="Founder" />

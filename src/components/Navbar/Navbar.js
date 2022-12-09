@@ -27,7 +27,7 @@ const Navbar = () => {
     setHide(!hide);
   };
   return (
-    <div>
+    <div className="max-w-screen-2xl mx-auto">
       <HeaderTop />
       <div className="flex justify-between md:px-20 px-10 h-24 items-center  object-contain">
         <div>
@@ -103,7 +103,7 @@ const Navbar = () => {
         </div>
         <div className="flex  gap-5">
           <div className="">
-            <div className="App">
+            <div className="cursor-pointer">
               <button
                 onClick={() => {
                   toggleModal(!modalShown);

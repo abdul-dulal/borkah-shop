@@ -8,7 +8,7 @@ import TopPrice from "./TopPrice";
 const Heilight = () => {
   const [toggleText, setToggletext] = useState("bestSelling");
   return (
-    <div>
+    <div className="max-w-screen-2xl mx-auto">
       <Title title="This Week's Highlights" />
       <div className="sm:flex justify-center gap-6  my-6 lg:px-20 px-10">
         <button

@@ -63,7 +63,7 @@ const CheckoutMethod = () => {
     );
   };
   return (
-    <div>
+    <div className="max-w-screen-2xl  mx-auto">
       <Featuredbanner name="PaymentMethod" />
       <h1 className="text-2xl font-serif text-center my-12">Choose a method</h1>
 
