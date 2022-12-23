@@ -13,7 +13,7 @@ const Sinlgeblog = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/blog/singleblog/${blogId}`)
+      .get(`https://borkha-shop.onrender.com/blog/singleblog/${blogId}`)
       .then((res) => setDesc(res.data));
   }, [blogId]);
   const DATE_OPTIONS = {

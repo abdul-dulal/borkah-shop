@@ -40,7 +40,7 @@ const LoginModal = ({ openLogin, setOpenLogin }) => {
     setEmail(data.email);
     signInWithEmailAndPassword(data.email, data.password);
     const { data: result } = await axios.post(
-      "http://localhost:3000/user/login",
+      "https://borkha-shop.onrender.com/user/login",
       {
         email: data.email,
         password: data.password,

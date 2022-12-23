@@ -38,7 +38,7 @@ const RegisterModal = ({ openRegister, setOpenRegister }) => {
     }
 
     axios
-      .post("http://localhost:3000/user/signup", {
+      .post("https://borkha-shop.onrender.com/user/signup", {
         email: data.email,
         password: data.password,
       })

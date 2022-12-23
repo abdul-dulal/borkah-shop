@@ -12,7 +12,7 @@ const HijabItem = () => {
   useEffect(() => {
     axios
       .get(
-        "http://localhost:3000/product/api/v1/hijabItem?category=hijab&category=niqab"
+        "https://borkha-shop.onrender.com/product/api/v1/hijabItem?category=hijab&category=niqab"
       )
       .then((res) => {
         setHijab(res.data);

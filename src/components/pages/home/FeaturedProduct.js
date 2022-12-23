@@ -11,7 +11,7 @@ const FeaturedProduct = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/product/api/v1/getAllProudct")
+      .get("https://borkha-shop.onrender.com/product/api/v1/getAllProudct")
       .then((res) => {
         setFeatured(res.data.slice(9, 21));
         setLoading(true);

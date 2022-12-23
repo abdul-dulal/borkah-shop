@@ -12,7 +12,7 @@ const BlogSidebar = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/blog/getAllBlog")
+      .get("https://borkha-shop.onrender.com/blog/getAllBlog")
       .then((res) => setallBlog(res.data));
   }, []);
   const DATE_OPTIONS = {

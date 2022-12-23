@@ -11,7 +11,7 @@ const OrderHistory = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/order/myOrder?user=${user?.email}`)
+      .get(`https://borkha-shop.onrender.com/order/myOrder?user=${user?.email}`)
       .then((res) => setOrder(res.data));
   }, [user?.email]);
   const DATE_OPTIONS = {

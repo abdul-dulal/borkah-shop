@@ -19,18 +19,20 @@ const EditProfile = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/checkout/billingDetails?user=${user?.email}`)
+      .get(
+        `https://borkha-shop.onrender.com/checkout/billingDetails?user=${user?.email}`
+      )
       .then((res) => setbilling(res.data[0]));
   }, [user?.email]);
 
   const handleChange = (e) => {
     e.preventDefault();
     axios.put(
-      `http://localhost:3000/checkout/updatebillingDetails/${billing._id}`
+      `https://borkha-shop.onrender.com/checkout/updatebillingDetails/${billing._id}`
     );
 
     axios.put(
-      `http://localhost:3000/checkout/updatebillingDetails/${billing._id}`,
+      `https://borkha-shop.onrender.com/checkout/updatebillingDetails/${billing._id}`,
       { phone }
     );
     toast.success("Successfylly updated");

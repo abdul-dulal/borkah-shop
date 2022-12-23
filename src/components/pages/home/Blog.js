@@ -13,10 +13,12 @@ const Blog = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:3000/blog/getAllBlog").then((res) => {
-      setBlog(res.data.slice(0, 3));
-      setLoading(true);
-    });
+    axios
+      .get("https://borkha-shop.onrender.com/blog/getAllBlog")
+      .then((res) => {
+        setBlog(res.data.slice(0, 3));
+        setLoading(true);
+      });
   }, []);
   const DATE_OPTIONS = {
     weekday: "short",

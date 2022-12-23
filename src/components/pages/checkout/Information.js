@@ -54,7 +54,7 @@ const Information = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/checkout/saveAddress", newbilling)
+      .post("https://borkha-shop.onrender.com/checkout/saveAddress", newbilling)
       .then((res) => {
         if (res.data === "success") {
           toast.success("billing address added");
@@ -68,7 +68,7 @@ const Information = () => {
     e.preventDefault();
 
     axios.put(
-      `http://localhost:3000/checkout/updatebillingDetails/${billing._id}`,
+      `https://borkha-shop.onrender.com/checkout/updatebillingDetails/${billing._id}`,
       newbilling
     );
     navigate("/payment-method");
@@ -84,7 +84,9 @@ const Information = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/checkout/billingDetails?user=${user?.email}`)
+      .get(
+        `https://borkha-shop.onrender.com/checkout/billingDetails?user=${user?.email}`
+      )
       .then((res) => setbilling(res.data[0]));
   }, [user?.email]);
 

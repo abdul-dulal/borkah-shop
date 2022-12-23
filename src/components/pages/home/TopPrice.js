@@ -8,10 +8,12 @@ const TopPrice = () => {
   const [topRated, setToprated] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    axios.get("http://localhost:3000/product/api/v1/topRated").then((res) => {
-      setToprated(res.data);
-      setLoading(true);
-    });
+    axios
+      .get("https://borkha-shop.onrender.com/product/api/v1/topRated")
+      .then((res) => {
+        setToprated(res.data);
+        setLoading(true);
+      });
   }, []);
   return (
     <div>
