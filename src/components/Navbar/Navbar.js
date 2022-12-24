@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/img/borkha-shop-logo.png";
-import { RiArrowDownSLine } from "react-icons/ri";
+
 import Submenu from "./Submenu";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useAuthState } from "react-firebase-hooks/auth";
