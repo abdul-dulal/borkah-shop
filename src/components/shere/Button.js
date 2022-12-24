@@ -20,7 +20,7 @@ const Button = ({ product }) => {
     };
 
     if (!user) {
-      return navigate("/login");
+      return navigate("/signup");
     }
     await createPost(cartItem);
     console.log(responseInfo.data);
