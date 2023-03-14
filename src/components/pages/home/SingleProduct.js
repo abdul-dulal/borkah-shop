@@ -52,7 +52,7 @@ const SingleProduct = () => {
       return navigate("/login");
     }
     await createPost(cartItem);
-    console.log(responseInfo.isSuccess);
+
     if (responseInfo?.isSuccess === false) {
       return toast("Successfully Added product");
     } else {

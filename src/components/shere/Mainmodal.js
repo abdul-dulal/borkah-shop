@@ -8,7 +8,7 @@ function Mainmodal({ children, shown, close }) {
         }}
       >
         <div
-          className="overflow-y-scroll h-96 w-80 bg-white p-6 z-[9999]"
+          className="overflow-y-scroll h-96 w-[350px] bg-white p-6 z-[9999]"
           onClick={(e) => {
             e.stopPropagation();
           }}

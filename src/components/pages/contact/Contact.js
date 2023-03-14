@@ -29,9 +29,7 @@ const Contact = () => {
             event.target.message.value = "";
           }
         },
-        (error) => {
-          console.log(error.text);
-        }
+        (error) => {}
       );
   };
 

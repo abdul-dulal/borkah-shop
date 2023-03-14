@@ -11,6 +11,7 @@ import {
   useCreateCheckoutMutation,
   useGetCartItemsbyuserQuery,
 } from "../../service/Post";
+import { totalPrice } from "../../shere/totalPrice";
 
 import PaymentInfo from "./PaymentInfo";
 
@@ -26,25 +27,21 @@ const Information = () => {
   const { data: cartitem } = useGetCartItemsbyuserQuery(user?.email);
 
   const navigate = useNavigate();
-  const price = cartitem && cartitem.map((e) => e.price);
-  const totalPrice =
-    price?.length > 0 &&
-    price.reduce((x, y) => {
-      return x + y;
-    });
+  const total = totalPrice(cartitem);
 
   const name = user?.displayName.split(/\s+/);
 
   const fname = name?.slice(0, 1).toString().split(",").join(" ");
   const lname = name?.slice(1, name.length).toString().split(",").join(" ");
+
   const newbilling = {
     fname: fname,
     lname: lname,
-    phone: parseFloat(phone),
+    phone: phone,
     city: city,
     address: address,
     state: state,
-    price: totalPrice,
+    price: total,
     user: user?.email,
     item: cartitem?.length,
     country: country,
@@ -52,6 +49,12 @@ const Information = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(phone);
+    if (!phone) toast("phone number is required");
+    if (!city) toast("city number is required");
+    if (!address) toast("address number is required");
+    if (!state) toast("state number is required");
+    if (!country) toast("country number is required");
 
     axios
       .post("https://borkha-shop.onrender.com/checkout/saveAddress", newbilling)
@@ -59,8 +62,6 @@ const Information = () => {
         if (res.data === "success") {
           toast.success("billing address added");
           navigate("/payment-method");
-        } else {
-          return toast.error(res?.data?.message?.slice());
         }
       });
   };
@@ -100,43 +101,33 @@ const Information = () => {
           <h1 className="text-2xl   font-semibold ">Billing details</h1>
 
           <div>
-            <div className="flex flex-wrap gap-6 my-3">
+            <div className="flex flex-wrap gap-6 mt-1">
               <div>
-                <label className="block my-2">
-                  First Name
-                  <span className="text-primary ml-2 text-xl">*</span>
-                </label>
+                <label className="block my-3">First Name</label>
                 <input
                   type="text"
                   value={fname}
-                  placeholder="Jhon"
-                  className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                  className="border-2 border-gray-400 py-2 px-3 w-72   my-3 text-lg  placeholder:text-[#035269] bg-white rounded-md  focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block my-2">
-                  Last Name <span className="text-primary ml-2 text-xl">*</span>
-                </label>
+                <label className="block my-3">Last Name</label>
                 <input
                   type="text"
                   value={lname}
-                  placeholder="Doe"
-                  className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                  className="border-2 border-gray-400 py-2 px-3 w-72   my-3 text-lg  placeholder:text-[#035269] bg-white rounded-md  focus:outline-none"
                 />
               </div>
             </div>
             <div className="flex flex-wrap gap-6 my-3">
               <div>
-                <label className="block my-2">
-                  Phone <span className="text-primary ml-2 text-xl">*</span>
-                </label>
+                <label className="block my-[6px]">Phone</label>
                 <input
                   type="number"
                   value={phone}
-                  placeholder="017..."
                   onChange={(e) => setPhone(e.target.value)}
-                  className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                  className="border-2 border-gray-400 py-2 px-3 w-72   my-3 text-lg  placeholder:text-[#035269] bg-white rounded-md  focus:outline-none"
                 />
               </div>
 
@@ -147,63 +138,49 @@ const Information = () => {
                 </label>
                 <input
                   type="number"
-                  placeholder="123..."
-                  className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                  className="border-2 border-gray-400 py-2 px-3 w-72   my-2 text-lg  placeholder:text-[#035269] bg-white rounded-md  focus:outline-none"
                 />
               </div>
             </div>
             <div className="flex flex-wrap gap-6 my-3">
               <div>
-                <label className="block my-2">
-                  City<span className="text-primary ml-2 text-xl">*</span>
-                </label>
+                <label className="block my-2">City</label>
                 <input
                   type="text"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  placeholder="xxx.."
-                  className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                  className="border-2 border-gray-400 py-2 px-3 w-72   my-2 text-lg  placeholder:text-[#035269] bg-white rounded-md  focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block my-2">
-                  State Address
-                  <span className="text-primary ml-2 text-xl">*</span>
-                </label>
+                <label className="block my-2"> Address</label>
                 <input
                   type="text"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="xxx.."
-                  className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                  className="border-2 border-gray-400 py-2 px-3 w-72   my-2 text-lg  placeholder:text-[#035269] bg-white rounded-md  focus:outline-none"
                 />
               </div>
             </div>
             <div className="flex flex-wrap gap-6 my-3">
               <div>
-                <label className="block my-2">
-                  State <span className="text-primary ml-2 text-xl">*</span>
-                </label>
+                <label className="block my-2">State</label>
                 <input
                   type="text"
                   value={state}
-                  placeholder="xxx..."
                   onChange={(e) => setstate(e.target.value)}
-                  className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                  className="border-2 border-gray-400 py-2 px-3 w-72   my-2 text-lg  placeholder:text-[#035269] bg-white rounded-md  focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block my-2">
-                  Country <span className="text-primary ml-2 text-xl">*</span>
-                </label>
+                <label className="block my-2">Country</label>
                 <input
                   type="text"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  placeholder="xxx..."
-                  className="text-gray-700 border border-gray-200 rounded py-2 px-3 w-72 leading-tight focus:outline-none focus:bg-white focus:border-primary"
+                  className="border-2 border-gray-400 py-2 px-3 w-72   my-2 text-lg  placeholder:text-[#035269] bg-white rounded-md  focus:outline-none"
                 />
               </div>
             </div>

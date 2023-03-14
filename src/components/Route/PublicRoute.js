@@ -9,6 +9,7 @@ import CheckoutMethod from "../pages/payment/PaymentMethod";
 import Payment from "../pages/payment/Payment";
 import Shop from "../pages/shop/Shop";
 import Signup from "../pages/signup/Signup";
+import Wishlist from "../pages/wishlist/Wishlist";
 
 export const PublicRoute = [
   { path: "/", name: "home", Component: Home },
@@ -19,6 +20,7 @@ export const PublicRoute = [
   { path: "/contact", name: "contact", Component: Contact },
   { path: "/blog", name: "blog", Component: Blog },
   { path: "/cart", name: "cart", Component: Cart },
+  { path: "/wishlist", name: "wishlist", Component: Wishlist },
   { path: "/checkout", name: "checkout", Component: Checkout },
   { path: "/author", name: "author", Component: Author },
   { path: "/payment", name: "payment", Component: Payment },

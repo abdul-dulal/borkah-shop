@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import Swal from "sweetalert2";
-import { useDeletePostMutation } from "../../service/Post";
-const CartTable = ({ info, total, setTotal }) => {
-  const [increment, setIncrement] = useState(1);
-  const { img, price, name, _id } = info;
+import {
+  useDeletePostMutation,
+  useUpdateQuantityMutation,
+} from "../../service/Post";
+const CartTable = ({ item }) => {
+  const { img, price, name, _id, quantity } = item;
   const [deletePost] = useDeletePostMutation();
-  total = price * increment;
-  setTotal(total);
+  const [updateQuantity] = useUpdateQuantityMutation();
 
   const handlelete = async (id) => {
     Swal.fire({
@@ -25,8 +26,14 @@ const CartTable = ({ info, total, setTotal }) => {
     });
   };
 
-  const handleIncrement = () => {
-    setIncrement(increment + 1);
+  const decrementQuantity = (id) => {
+    const updateItem = { quantity: quantity - 1, id };
+    updateQuantity(updateItem);
+  };
+
+  const incrementQuantity = (id) => {
+    const updateItem = { quantity: quantity + 1, id };
+    updateQuantity(updateItem);
   };
   return (
     <>
@@ -41,27 +48,22 @@ const CartTable = ({ info, total, setTotal }) => {
         <td>
           <div className="space-x-4 text-xl font-bold text-[#6B7280] border-2 h-10    w-28  flex items-center justify-center">
             <button
-              onClick={() => setIncrement(increment - 1)}
-              disabled={increment == 1}
-              className={`cursor-pointer  ${
-                increment <= 1 ? "cursor-not-allowed" : ""
-              }`}
+              onClick={() => decrementQuantity(_id)}
+              disabled={quantity === 1}
+              className={`cursor-pointer  `}
             >
               -
             </button>
-            <span className="text-xl">{increment}</span>
+            <span className="text-xl">{quantity}</span>
             <button
-              disabled={increment >= 10}
-              onClick={() => handleIncrement(_id)}
-              className={`cursor-pointer ${
-                increment >= 10 ? "cursor-not-allowed" : ""
-              }`}
+              onClick={() => incrementQuantity(_id)}
+              className={`cursor-pointer `}
             >
               +
             </button>
           </div>
         </td>
-        <td>${total}</td>
+        <td>{price * quantity}</td>
         <td onClick={() => handlelete(_id)} className="text-2xl cursor-pointer">
           X
         </td>

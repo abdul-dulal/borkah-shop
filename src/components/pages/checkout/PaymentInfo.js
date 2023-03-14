@@ -1,15 +1,9 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+
+import { totalPrice } from "../../shere/totalPrice";
 
 const PaymentInfo = ({ data, billing }) => {
-  const location = useLocation();
-
-  const price = data?.map((e) => e.price);
-  const totalPrice =
-    price?.length > 0 &&
-    price.reduce((x, y) => {
-      return x + y;
-    });
+  const total = totalPrice(data);
 
   return (
     <div>
@@ -27,7 +21,7 @@ const PaymentInfo = ({ data, billing }) => {
               key={e._id}
             >
               <h2 className="mt-6 line-clamp-1">{e.name}</h2>
-              <p>$ {e.price}</p>
+              <p>$ {e.price * e.quantity}</p>
             </div>
           ))}
         </div>
@@ -39,22 +33,23 @@ const PaymentInfo = ({ data, billing }) => {
         <p className="border-solid border border-gray-300 my-5"></p>
         <div className="flex  justify-between">
           <p className="text-2xl">Total</p>
-          <p className="text-2xl">
-            $ {location?.state ? location?.state?.total : totalPrice}
-          </p>
+          <p className="text-2xl">$ {total}</p>
         </div>
+
         {billing ? (
-          <input
+          <button
             type="submit"
-            value="Place order"
             className="uppercase bg-primary mt-6 cursor-pointer h-12 w-6/12 block mx-auto rounded text-white hover:bg-black"
-          />
+          >
+            Place order
+          </button>
         ) : (
-          <input
-            type="submit"
-            value="Place order"
+          <button
+            type="sumbmit"
             className="uppercase bg-primary mt-6 cursor-pointer h-12 w-6/12 block mx-auto rounded text-white hover:bg-black"
-          />
+          >
+            Place order
+          </button>
         )}
       </div>
     </div>

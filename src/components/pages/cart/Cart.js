@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../Firebaseinit";
 import { useGetCartItemsbyuserQuery } from "../../service/Post";
+import { totalPrice } from "../../shere/totalPrice";
 import CartTable from "./CartTable";
 const Cart = () => {
-  const [total, setTotal] = useState(0);
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const { data } = useGetCartItemsbyuserQuery(user?.email);
+  const granPrice = totalPrice(data);
+
   return (
     <div className="lg:px-20 px-10 -z-[9999] max-w-screen-2xl mx-auto">
       {user ? (
@@ -26,13 +28,8 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody>
-                {data?.map((info) => (
-                  <CartTable
-                    key={info._id}
-                    info={info}
-                    total={total}
-                    setTotal={setTotal}
-                  />
+                {data?.map((item) => (
+                  <CartTable key={item._id} item={item} />
                 ))}
               </tbody>
             </table>
@@ -52,12 +49,12 @@ const Cart = () => {
                 <p className="border-b-2 border-gray-300 h-2 w-full "></p>
                 <div className="flex justify-between text-2xl py-3">
                   <p>total</p>
-                  <p>{total}</p>
+                  <p>{granPrice}</p>
                 </div>
                 <div className="flex gap-4 py-3">
                   <input
                     type="text"
-                    placeholder="Code: e-shop"
+                    placeholder="borkha-shop"
                     className="  border border-gray-400 w-44 focus:outline-none focus:outline-primary h-10 placeholder:text-black px-1 "
                   />
                   <button className="h-10 w-40 rounded-sm bg-primary text-white hover:bg-gray-600">
@@ -68,12 +65,14 @@ const Cart = () => {
                   <h2 className="text-2xl text-black font-semibold">
                     Grand Total
                   </h2>
-                  <p className="text-2xl text-black font-semibold">{total}</p>
+                  <p className="text-2xl my-3 text-black font-semibold">
+                    {granPrice}
+                  </p>
                 </div>
                 <Link
                   to="/checkout"
-                  state={{ total, ischeck: true }}
-                  className="bg-primary mt-4 text-white py-3 px-10  rounded-sm w-full
+                  state={{ granPrice, ischeck: true }}
+                  className="bg-primary text-white py-3 px-10  rounded-sm w-full
                 text-xl hover:bg-gray-600 "
                 >
                   Proced To Checkout

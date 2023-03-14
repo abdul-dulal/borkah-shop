@@ -20,7 +20,7 @@ const SearchResult = () => {
         `https://borkha-shop.onrender.com/product/search?name=${text}&page=1&limit=12`
       );
       const data = await res.json();
-      console.log(data.results);
+
       setLoading(true);
       setpageCount(Math.ceil(46 / limit));
       setSearchProduct(data.results);

@@ -23,7 +23,7 @@ const Button = ({ product }) => {
       return navigate("/signup");
     }
     await createPost(cartItem);
-    console.log(responseInfo.data);
+
     if (responseInfo.isSuccess === false) {
       return toast("Successfully Added product");
     } else {

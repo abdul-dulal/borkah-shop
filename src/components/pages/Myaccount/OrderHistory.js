@@ -37,9 +37,11 @@ const OrderHistory = () => {
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id}>
-                  <th>{order.transactionId.slice(0, 7)} </th>
+                  <th>
+                    {order.transactionId.slice(0, 7)}
+                    {Math.random()}{" "}
+                  </th>
                   <td>
-                    {" "}
                     {new Date(order.createdAt).toLocaleDateString(
                       "en-US",
                       DATE_OPTIONS

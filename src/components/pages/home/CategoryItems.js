@@ -4,6 +4,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Modal from "../../../components/shere/Modal";
 import Button from "../../shere/Button";
+import Wishlist from "../../shere/Wishlist";
 const CategoryItems = ({ item }) => {
   const { _id, name, review, price } = item;
   const [modal, setModal] = useState(false);
@@ -36,8 +37,11 @@ const CategoryItems = ({ item }) => {
             : ""}
           <span className="text-primary ml-2 ">({review})</span>
         </p>
-        <div className="items bg-white h-8 w-8  text-xl rounded-full cursor-pointer hover:bg-primary hover:text-white flex justify-center items-center">
-          <MdOutlineRemoveRedEye onClick={() => handleShow(_id)} />
+        <div className="items ">
+          <div className=" bg-white h-8 w-8  text-xl rounded-full cursor-pointer hover:bg-primary hover:text-white flex justify-center items-center">
+            <MdOutlineRemoveRedEye onClick={() => handleShow(_id)} />
+          </div>
+          <Wishlist item={item} />
         </div>
         {modal ? <Modal setModal={setModal} id={id} /> : ""}
       </div>

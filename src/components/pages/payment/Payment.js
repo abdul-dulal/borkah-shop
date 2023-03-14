@@ -56,4 +56,3 @@ const Payment = ({ open, setOpen }) => {
 };
 
 export default Payment;
-<h1>hello</h1>;

@@ -8,7 +8,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Logout from "../shere/Logout";
 import auth from "../../Firebaseinit";
 import avatar from "../../assets/img/avatar.a296afc6.png";
-import { useGetCartItemsbyuserQuery } from "../service/Post";
+import wishlist from "../../assets/img/wishlist.png";
+import {
+  useGetCartItemsbyuserQuery,
+  useGetWishlistItemsbyuserQuery,
+} from "../service/Post";
 import HeaderTop from "./HeaderTop";
 import Mainmodal from "../shere/Mainmodal";
 import Cartmodal from "../../components/shere/CartModal";
@@ -18,6 +22,7 @@ const Navbar = () => {
   const [modalShown, toggleModal] = useState(false);
   const [user] = useAuthState(auth);
   const { data } = useGetCartItemsbyuserQuery(user?.email);
+  const { data: wishlistItem } = useGetWishlistItemsbyuserQuery(user);
 
   let activeStyle = {
     color: "#F766AD",
@@ -26,8 +31,9 @@ const Navbar = () => {
   const handleHide = () => {
     setHide(!hide);
   };
+
   return (
-    <div className="max-w-screen-2xl mx-auto">
+    <div className="">
       <HeaderTop />
       <div className="flex justify-between md:px-20 px-10 h-24 items-center  object-contain">
         <div>
@@ -101,15 +107,27 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="flex  gap-5">
-          <div className="">
+        <div className="flex   gap-6">
+          <div className="mt-5">
             <div className="cursor-pointer">
+              <Link to="/wishlist">
+                <img src={wishlist} className="w-7" alt="" />
+              </Link>
+            </div>
+            <div className="relative -top-9 left-4 ">
+              <p className="bg-black  flex justify-center text-sm items-center w-5 h-5 rounded-full text-white">
+                {wishlistItem ? wishlistItem?.length : 0}
+              </p>
+            </div>
+          </div>
+          <div className="">
+            <div className="">
               <button
                 onClick={() => {
                   toggleModal(!modalShown);
                 }}
               >
-                <AiOutlineShoppingCart className="text-2xl font-bold mt-6" />
+                <AiOutlineShoppingCart size={25} className=" font-bold mt-6" />
               </button>
               <Mainmodal
                 shown={modalShown}

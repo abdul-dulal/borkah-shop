@@ -8,7 +8,6 @@ const BlogSidebar = () => {
   const [allBlog, setallBlog] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  console.log(searchTerm);
 
   useEffect(() => {
     axios

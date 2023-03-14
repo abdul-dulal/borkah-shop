@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../Firebaseinit";
 import {
+  useDeleteAllItemMutation,
   useDeleteManyMutation,
   useGetCartItemsbyuserQuery,
 } from "../../service/Post";
@@ -22,7 +23,7 @@ const CheckoutForm = ({ order, setOpen }) => {
   const [user] = useAuthState(auth);
   const { data } = useGetCartItemsbyuserQuery(user?.email);
   const ids = data.map((e) => e._id);
-  const [deletePost] = useDeleteManyMutation();
+  const [deletePost] = useDeleteAllItemMutation();
 
   useEffect(() => {
     fetch(`https://borkha-shop.onrender.com/create-payment-intent`, {
@@ -101,7 +102,7 @@ const CheckoutForm = ({ order, setOpen }) => {
 
         .then((res) => {
           if (res.data.message === "Success") {
-            return deletePost(ids), navigate("/myaccount/orderHistory");
+            return [deletePost(ids), navigate("/myaccount/orderHistory")];
           }
         });
     }
