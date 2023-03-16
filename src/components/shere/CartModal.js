@@ -16,8 +16,8 @@ const Cartmodal = ({ toggleModal }) => {
 
   return (
     <div>
-      <div className="">
-        {data?.length > 0 ? (
+      {data.length > 0 ? (
+        <div className="">
           <div className="divide-y divide-blue-200">
             {data.map((data) => (
               <div>{<Cartdetails data={data} key={data._id} />}</div>
@@ -28,26 +28,31 @@ const Cartmodal = ({ toggleModal }) => {
               <p>${result}</p>
             </div>
           </div>
-        ) : (
+
           <h2 className="mt-36  flex items-center justify-center   text-xl">
             No items added to cart
           </h2>
-        )}
-        <div className="px-6 py-12">
-          <button
-            onClick={() => [navigate("/cart"), toggleModal(false)]}
-            className="bg-primary text-white uppercase w-full h-10 hover:bg-gray-600"
-          >
-            View Cart
-          </button>
-          <button
-            onClick={() => [navigate("/checkout"), toggleModal(false)]}
-            className="bg-primary text-white uppercase w-full h-10 mt-3 hover:bg-gray-600"
-          >
-            CheckOut
-          </button>
+
+          <div className="px-6 py-12">
+            <button
+              onClick={() => [navigate("/cart"), toggleModal(false)]}
+              className="bg-primary text-white uppercase w-full h-10 hover:bg-gray-600"
+            >
+              View Cart
+            </button>
+            <button
+              onClick={() => [navigate("/checkout"), toggleModal(false)]}
+              className="bg-primary text-white uppercase w-full h-10 mt-3 hover:bg-gray-600"
+            >
+              CheckOut
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <h2 className="mt-36  flex items-center justify-center   text-xl">
+          No items added to cart
+        </h2>
+      )}
     </div>
   );
 };

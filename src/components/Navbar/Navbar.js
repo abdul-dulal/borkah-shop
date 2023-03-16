@@ -110,7 +110,7 @@ const Navbar = () => {
         <div className="flex   gap-6">
           <div className="mt-5">
             <div className="cursor-pointer">
-              <Link to="/wishlist">
+              <Link to={user ? "/wishlist" : "/signup"}>
                 <img src={wishlist} className="w-7" alt="" />
               </Link>
             </div>
