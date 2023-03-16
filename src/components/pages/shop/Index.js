@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -13,16 +14,25 @@ const Index = () => {
   const [lowest, setlowest] = useState(400);
   const [highest, setHighest] = useState(8000);
   const [loading, setLoading] = useState(false);
+  const [filterProduct, setFilterproduct] = useState();
 
   let limit = 12;
   useEffect(() => {
+    axios
+      .get(
+        `https://borkha-shop.onrender.com/product/lowestPrice?min=${lowest}&max=${highest}`
+      )
+      .then((res) => setFilterproduct(res.data.length));
+
     const getComments = async () => {
       const res = await fetch(
         `https://borkha-shop.onrender.com/product/pagination?page=1&limit=${limit}&lowest=${lowest}&highest=${highest}`
       );
       const data = await res.json();
       setLoading(true);
-      setpageCount(Math.ceil(46 / limit));
+      setpageCount(
+        filterProduct ? Math.ceil(filterProduct / limit) : Math.ceil(46 / limit)
+      );
       setProduct(data.results);
     };
     getComments();
@@ -38,7 +48,6 @@ const Index = () => {
   const handlePageClick = async (data) => {
     let currentPage = data.selected + 1;
     const pageItem = await fetchComments(currentPage);
-
     setProduct(pageItem.results);
   };
 

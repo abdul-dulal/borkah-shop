@@ -1,6 +1,4 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { AiTwotoneStar } from "react-icons/ai";
 import { useLocation, useNavigate } from "react-router-dom";
 import SliderImage from "react-zoom-slider";
@@ -8,19 +6,29 @@ import Description from "./ZoomSlider";
 import Sidebar from "./Sidebar";
 import ReletedProduct from "./ReletedProduct";
 import Featuredbanner from "./Featuredbanner";
-import { useCreatePostMutation } from "../../service/Post";
+import {
+  useCreatePostMutation,
+  useGetProuductQuery,
+  useProductUpdateQuantityMutation,
+} from "../../service/Post";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../Firebaseinit";
+import Loading from "../../shere/Loading";
 const SingleProduct = () => {
-  const [product, setProduct] = useState([]);
-  const [quantity, setQuantity] = useState(1);
   const [createPost, responseInfo] = useCreatePostMutation();
   const location = useLocation();
   const id = location.state._id;
-  const { name, price, review, img, category } = product;
+  const { data, isLoading } = useGetProuductQuery(id);
+  const [updateQuantity] = useProductUpdateQuantityMutation();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const { name, price, review, img, category, quantity } = data;
 
   const categoryList = [
     "borkha",
@@ -30,15 +38,9 @@ const SingleProduct = () => {
     "stylish",
     "abaya",
   ];
-  const categoryItem = categoryList[Math.floor(Math.random() * 6) + 1];
 
+  const categoryItem = categoryList[Math.floor(Math.random() * 5) + 1];
   const plain = price * quantity;
-  useEffect(() => {
-    axios
-      .get(`https://borkha-shop.onrender.com/product/api/v1/getbyId/${id}`)
-      .then((res) => setProduct(res.data));
-  }, [id]);
-
   const handleAddtoCart = async (product) => {
     const cartItem = {
       name,
@@ -58,6 +60,16 @@ const SingleProduct = () => {
     } else {
       toast.error("Product already exist in cart");
     }
+  };
+
+  const decremntQuantity = () => {
+    const updateItem = { quantity: quantity - 1, id };
+    updateQuantity(updateItem);
+  };
+
+  const incrementQuantity = () => {
+    const updateItem = { quantity: quantity + 1, id };
+    updateQuantity(updateItem);
   };
 
   return (
@@ -105,7 +117,7 @@ const SingleProduct = () => {
           <div className="flex  mt-8">
             <button
               className="border h-10 w-10 text-center cursor-pointer flex items-center justify-center"
-              onClick={() => setQuantity(quantity - 1)}
+              onClick={decremntQuantity}
               disabled={quantity === 1}
             >
               -
@@ -115,8 +127,8 @@ const SingleProduct = () => {
             </p>
             <button
               className={`border h-10 w-10 text-center cursor-pointer flex items-center justify-center`}
-              onClick={() => setQuantity(quantity + 1)}
-              disabled={quantity === 5}
+              onClick={incrementQuantity}
+              disabled={quantity === 10}
             >
               +
             </button>

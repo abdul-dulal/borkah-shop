@@ -18,8 +18,8 @@ const Sidebar = ({
 }) => {
   const [topRated, setToprated] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [errElement, seterrElement] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get(
@@ -29,10 +29,8 @@ const Sidebar = ({
   }, [categoryItem]);
 
   const handleSearch = () => {
-    if (searchTerm && typeof searchTerm === String) {
+    if (searchTerm) {
       return navigate(`/searchby/${searchTerm}`);
-    } else {
-      seterrElement("Please Enter string");
     }
   };
   return (
@@ -41,7 +39,6 @@ const Sidebar = ({
         <input
           type="text"
           name="search"
-          required
           id=""
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Product..."
@@ -53,7 +50,6 @@ const Sidebar = ({
           className="bg-primary font-bold cursor-pointer  text-white h-[46px] ml-1 w-6 "
         />
       </span>
-      <p className="text-red-700 text-xl">{errElement}</p>
 
       {range && (
         <Pagination

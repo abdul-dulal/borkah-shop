@@ -1,6 +1,10 @@
 import React from "react";
-import ReactSlider from "react-slider";
+import MultiRangeSlider from "multi-range-slider-react";
 const Pagination = ({ lowest, setlowest, highest, setHighest }) => {
+  const handleInput = (e) => {
+    setlowest(e.minValue);
+    setHighest(e.maxValue);
+  };
   return (
     <div>
       <div>
@@ -11,32 +15,21 @@ const Pagination = ({ lowest, setlowest, highest, setHighest }) => {
         <p className="pb-5 tracking-wider">
           ${lowest}-${highest?.toLocaleString("en-US")}
         </p>
-        <ReactSlider
-          defaultValue={[lowest, highest]}
-          className="cursor-pointer w-full"
-          trackClassName="bg-black h-[2px]"
-          min={400}
-          max={8000}
-          minDistance={0}
-          step={500}
-          withTracks={true}
-          pearling={true}
-          renderThumb={(props) => {
-            return (
-              <div
-                {...props}
-                className="w-3 h-3 bg-white rounded-full border-2 border-[#383838] cursor-pointer absolute -top-2 "
-              ></div>
-            );
-          }}
-          renderTrack={(props) => {
-            return <div {...props} className="bg-primary h-[3px]"></div>;
-          }}
-          onChange={([min, max]) => {
-            setlowest(min);
-            setHighest(max);
-          }}
-        />
+        <div className="">
+          <MultiRangeSlider
+            min={400}
+            max={7400}
+            step={500}
+            ruler={false}
+            label={false}
+            minValue={400}
+            maxValue={8000}
+            barInnerColor={"#F766AD"}
+            onInput={(e) => {
+              handleInput(e);
+            }}
+          />
+        </div>
       </div>
     </div>
   );

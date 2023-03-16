@@ -30,6 +30,17 @@ const EditAddress = () => {
   }, [billing]);
   const handleUpdate = (e) => {
     e.preventDefault();
+    axios
+      .put(
+        `https://borkha-shop.onrender.com/checkout/updatebillingDetails/${billing._id}`,
+        // eslint-disable-next-line no-dupe-keys
+        { city, address, country, address }
+      )
+      .then((res) => {
+        if (res.status == 200) {
+          toast.success("Address successfully updated");
+        }
+      });
   };
   return (
     <div className="lg:ml-0 ml-10 md:mt-0 mt-14">

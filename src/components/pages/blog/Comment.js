@@ -32,6 +32,10 @@ const Comment = ({ desc }) => {
         </div>
       </div>
 
+      <div className="flex justify-between my-5">
+        <button className="border h-10 w-32">Previous</button>
+        <button className="border h-10 w-32">Next</button>
+      </div>
       <h1 className="text-2xl my-3 font-bold">Leave a Reply </h1>
       <form>
         <textarea
@@ -39,26 +43,7 @@ const Comment = ({ desc }) => {
           className="w-full h-24 border-2 outline-offset-0 outline-primary px-3 py-1 ring-0"
           placeholder="Your comment here..."
         ></textarea>
-        <input
-          type="text"
-          name=""
-          className="w-72 h-10 mt-4 border px-3"
-          placeholder="Name"
-          required
-        />
-        <input
-          type="email"
-          className="w-72 h-10 ml-5 border px-3"
-          name=""
-          placeholder="Email"
-          required
-        />
-        <input
-          type="text"
-          className="w-72 h-10 ml-5 border px-3"
-          name=""
-          placeholder="Website"
-        />
+
         <input
           type="submit"
           value="Post Comment"

@@ -8,3 +8,4 @@ export const totalPrice = (data) => {
     });
   return granPrice;
 };
+

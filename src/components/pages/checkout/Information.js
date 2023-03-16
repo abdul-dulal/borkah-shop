@@ -49,7 +49,6 @@ const Information = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(phone);
     if (!phone) toast("phone number is required");
     if (!city) toast("city number is required");
     if (!address) toast("address number is required");
