@@ -10,7 +10,6 @@ const Contact = () => {
 
   const sendEmail = (event) => {
     event.preventDefault();
-    console.log(event.target.subject.value);
 
     emailjs
       .sendForm(
