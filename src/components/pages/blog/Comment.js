@@ -17,7 +17,7 @@ const Comment = ({ desc }) => {
     <div>
       <div className="flex gap-3 mt-5 items-center">
         <p className="text-[12px] font-bold">Category</p>
-        <div className="flex gap-1">
+        <div className="flex flex-wrap gap-1">
           {allBlog[7]?.category.map((item) => (
             <ul className="text-sm font-medium" key={item._id}>
               <Link

@@ -68,7 +68,7 @@ export default function App() {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div className="absolute lg:bottom-32 bottom-16 left-[37%] lg:left-[45%]">
+      <div className="absolute 2xl:bottom-28 xl:bottom-20 lg:bottom-28 bottom-16 left-[37%] lg:left-[45%]">
         <button
           className="bg-white w-44 h-12 rounded cursor-pointer text-primary mt-12"
           onClick={() => navigate("/shop")}

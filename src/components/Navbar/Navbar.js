@@ -35,7 +35,7 @@ const Navbar = () => {
   return (
     <div className="">
       <HeaderTop />
-      <div className="flex justify-between md:px-20 px-10 h-24 items-center  object-contain">
+      <div className="flex justify-between md:px-20 px-10 h-24 items-center  object-contain max-w-screen-2xl mx-auto">
         <div>
           <NavLink to="home">
             <img src={logo} alt="" />

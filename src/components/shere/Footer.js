@@ -12,13 +12,17 @@ import { BsTwitter } from "react-icons/bs";
 import { FaPinterestP } from "react-icons/fa";
 import logo from "../../assets/img/footer-logo-borkha-shop.png";
 import payment from "../../assets/img/payment.png";
+import { useNavigate } from "react-router-dom";
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <div className="max-w-screen-2xl mx-auto">
       <footer className="bg-white dark:bg-gray-900 px-12">
         <div className="grid  sm:grid-cols-2 grid-cols-1 gap-8 py-14 px-6 md:grid-cols-4">
           <div>
-            <img src={logo} alt="" />
+            <div className="cursor-pointer" onClick={() => navigate("/")}>
+              <img src={logo} alt="" />
+            </div>
             <ul className="text-white mt-3">
               <li className="mb-2">Lorem ipsum dolor sit amet, </li>
               <li className="mb-2">consectetur adipiscing elit, sed do</li>

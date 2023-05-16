@@ -49,11 +49,12 @@ const Information = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(phone);
     if (!phone) toast("phone number is required");
-    if (!city) toast("city number is required");
-    if (!address) toast("address number is required");
-    if (!state) toast("state number is required");
-    if (!country) toast("country number is required");
+    if (!city) toast("city address is required");
+    if (!address) toast("address  is required");
+    if (!state) toast("state  is required");
+    if (!country) toast("country  is required");
 
     axios
       .post("https://borkha-shop.onrender.com/checkout/saveAddress", newbilling)

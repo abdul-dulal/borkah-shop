@@ -26,10 +26,10 @@ const Sinlgeblog = () => {
   return (
     <div className="max-w-screen-2xl  mx-auto">
       <Featuredbanner name={desc?.blogTitle} />
-      <div className="grid lg:grid-cols-3 grid-cols-1 lg:px-20 px-10 my-20 gap-10">
+      <div className="grid lg:grid-cols-3 grid-cols-1 lg:px-20 px-10 my-20 gap-10 max-w-screen-2xl mx-auto">
         <div className="col-span-2">
           <img src={desc?.blogImg} alt="" />
-          <h1 className="mt-5 text-2xl font-bold">{desc?.blogTitle}</h1>
+          <h1 className="mt-5 sm:text-2xl font-bold">{desc?.blogTitle}</h1>
           <div className="flex gap-4 my-6">
             <Link
               to="/author"

@@ -29,10 +29,6 @@ const Cartmodal = ({ toggleModal }) => {
             </div>
           </div>
 
-          <h2 className="mt-36  flex items-center justify-center   text-xl">
-            No items added to cart
-          </h2>
-
           <div className="px-6 py-12">
             <button
               onClick={() => [navigate("/cart"), toggleModal(false)]}
