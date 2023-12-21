@@ -62,7 +62,7 @@ export const postApi = createApi({
     updateQuantity: builder.mutation({
       query: (updateItem) => {
         const { id, ...data } = updateItem;
-        console.log(id);
+
         return {
           url: `cart/updateQunatity/${id}`,
           method: "PUT",

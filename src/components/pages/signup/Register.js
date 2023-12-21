@@ -13,6 +13,7 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
 import auth from "../../../Firebaseinit";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   user_name: "",
@@ -25,6 +26,7 @@ const Register = ({ openRegister, setOpenRegister }) => {
   const [agree, setAgree] = useState(false);
   const [createUserWithEmailAndPassword, signupUser, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
 
   const onSubmit = (values) => {
     const { user_name, email, password } = values;
@@ -40,6 +42,7 @@ const Register = ({ openRegister, setOpenRegister }) => {
         toast(res?.data);
       });
   };
+  if (signupUser) return navigate("/");
 
   return (
     <div>
