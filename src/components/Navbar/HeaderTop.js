@@ -12,7 +12,7 @@ const HeaderTop = () => {
           <HiPhone />
           <p>Mobile : </p>
           <p className="hover:text-secondary duration-500 cursor-pointer">
-            01778613474
+            01957804564
           </p>
         </div>
         <div className="flex items-center gap-1">

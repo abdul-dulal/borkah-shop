@@ -48,7 +48,7 @@ const OrderHistory = () => {
                     )}
                   </td>
 
-                  <td>pending</td>
+                  <td>pending...</td>
                   <td>${order.price}</td>
                 </tr>
               ))}

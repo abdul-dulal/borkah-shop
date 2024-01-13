@@ -10,6 +10,8 @@ import Payment from "../pages/payment/Payment";
 import Shop from "../pages/shop/Shop";
 import Signup from "../pages/signup/Signup";
 import Wishlist from "../pages/wishlist/Wishlist";
+import Cancel from "../pages/Cancel";
+import Success from "../pages/Success";
 
 export const PublicRoute = [
   { path: "/", name: "home", Component: Home },
@@ -24,6 +26,9 @@ export const PublicRoute = [
   { path: "/checkout", name: "checkout", Component: Checkout },
   { path: "/author", name: "author", Component: Author },
   { path: "/payment", name: "payment", Component: Payment },
+  { path: "/cancel", name: "cancel", Component: Cancel },
+  { path: "/success", name: "success", Component: Success },
+
   {
     path: "/payment-method",
     name: "checkout-method",

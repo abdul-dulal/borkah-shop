@@ -29,10 +29,10 @@ const Information = () => {
   const navigate = useNavigate();
   const total = totalPrice(cartitem);
 
-  const name = user?.displayName.split(/\s+/);
+  const name = user?.displayName?.split(/\s+/);
 
-  const fname = name?.slice(0, 1).toString().split(",").join(" ");
-  const lname = name?.slice(1, name.length).toString().split(",").join(" ");
+  const fname = name?.slice(0, 1).toString()?.split(",")?.join(" ");
+  const lname = name?.slice(1, name.length).toString()?.split(",")?.join(" ");
 
   const newbilling = {
     fname: fname,
